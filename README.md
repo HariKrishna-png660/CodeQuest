@@ -18,16 +18,5 @@ Sharpen your swords (or compilers 🖥️), pack your algorithms, and join me on
 
 ---
 
-## 🗡️ Legendary Achievements (Badges/Medals So Far...)  
-
-From arrays to graphs, from brute force battles to dynamic victories — every step is progress.  
-Medals earned 🥇🥈🥉 … countless adventures ahead.  
-  
-<img src="https://raw.githubusercontent.com/yourusername/yourrepo/main/assets/leetcode-50days.gif" width="120"/>  
-<img src="https://raw.githubusercontent.com/yourusername/yourrepo/main/assets/leetcode-100days.gif" width="120"/>  
-
----
-
-## 🏹 Quest Log (Repository Structure)  
 
 
