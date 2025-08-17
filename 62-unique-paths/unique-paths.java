@@ -1,8 +1,8 @@
 class Solution {
     // tabulation solution ...
     public int uniquePaths(int dr,int dc,int memo[][]) {
-        for(int i=dr;i>=0;i--) {
             for(int j=dc;j>=0;j--) {
+                for(int i=dr;i>=0;i--) {
                  if(i==dr && j==dc) {
                    memo[i][j]=1;
                    continue;
