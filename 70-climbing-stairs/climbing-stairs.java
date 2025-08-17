@@ -1,22 +1,19 @@
 class Solution {
-    // memoization solution ..
-    public int climbStairs(int n,int memo[]) {
-        if(n<0) {
-            return 0;
+    // tabulation solution ....
+    public int climbStairs(int n,int tab[]) {
+        for(int i=1;i<=n;i++) {
+            if(i<=2) {
+                tab[i]=i;
+                continue;
+            }
+            int oneStep=tab[i-1];
+            int twoSteps=tab[i-2];
+            tab[i]=oneStep+twoSteps;
         }
-        if(n==0) {
-            return 1;
-        }
-        if(memo[n]!=0) {
-            return memo[n];
-        }
-        int oneStep=climbStairs(n-1,memo);
-        int twoSteps=climbStairs(n-2,memo);
-        int totalSteps=oneStep+twoSteps;
-        return memo[n]=totalSteps;
+        return tab[n];
     }
     public int climbStairs(int n) {
-        int memo[]=new int[n+1];
-        return climbStairs(n,memo);
+        int tab[]=new int[n+1];
+        return climbStairs(n,tab);
     }
 }
