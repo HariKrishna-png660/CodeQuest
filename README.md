@@ -16,7 +16,7 @@ Sharpen your swords (or compilers 🖥️), pack your algorithms, and join me on
 
 ## 📊 My LeetCode Stats  
 
-![LeetCode Stats](https://leetcard.jacoblin.cool/real_dusk_84/E?theme=dark&font=baloo&ext=contest)  
+![LeetCode Stats](https://leetcard.jacoblin.cool/real_dusk_84E?theme=dark&font=baloo&ext=contest)  
 
 ---
 
