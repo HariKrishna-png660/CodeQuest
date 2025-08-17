@@ -22,8 +22,7 @@ Sharpen your swords (or compilers 🖥️), pack your algorithms, and join me on
 
 From arrays to graphs, from brute force battles to dynamic victories — every step is progress.  
 Medals earned 🥇🥈🥉 … countless adventures ahead.  
-
-<img src="https://miro.medium.com/v2/resize:fit:720/1*YJty0oZ9A55kiUZH-yu-4A.gif" width="120"/>  
+  
 <img src="https://raw.githubusercontent.com/yourusername/yourrepo/main/assets/leetcode-50days.gif" width="120"/>  
 <img src="https://raw.githubusercontent.com/yourusername/yourrepo/main/assets/leetcode-100days.gif" width="120"/>  
 
