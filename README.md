@@ -1,5 +1,3 @@
-# DSA
-LeetCode and GeekForGeeks
 # 🧭⚔️ CODEQUEST 🧩🚀  
 
 This is **my coding odyssey** where I embark on quests to conquer tricky LeetCode problems — one challenge at a time.  
@@ -16,7 +14,7 @@ Sharpen your swords (or compilers 🖥️), pack your algorithms, and join me on
 
 ## 📊 My LeetCode Stats  
 
-![LeetCode Stats](https://leetcard.jacoblin.cool/real_dusk_84E?theme=dark&font=baloo&ext=contest)  
+![LeetCode Stats](https://leetcard.jacoblin.cool/real_dusk_84?theme=dark&font=baloo&ext=contest)  
 
 ---
 
@@ -28,4 +26,6 @@ Medals earned 🥇🥈🥉 … countless adventures ahead.
 ---
 
 ## 🏹 Quest Log (Repository Structure)  
+
+
 
