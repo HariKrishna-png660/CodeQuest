@@ -50,6 +50,7 @@ class Solution {
             tab[i]=minCost+cost[i];
         }
     }
+   
     public int minCostClimbingStairs(int[] cost) {
         // int n=cost.length;
         // int cost1=minCostClimbingStairs(0,n-1,cost);
@@ -65,11 +66,28 @@ class Solution {
         // int cost2=minCostClimbingStairs(1,n-1,cost,memo);
         // return Math.min(cost1,cost2);
         // ===============================
+        // int n=cost.length;
+        // int tab[]=new int[n+1];
+        //  minCostClimbingStairs(n-1,cost,tab);
+        //  int cost0=tab[0];
+        //  int cost1=tab[1];
+        //  return Math.min(cost0,cost1);
+        // ================================
+        // int n=cost.length;
+        // int cost0=minCostClimbingStairs(0,n-1,cost);
+        // System.out.println(cost0);
+        // int cost1=minCostClimbingStairs(1,n-1,cost);
+        // System.out.println(cost1);
+        // return Math.min(cost0,cost1);
+        // ===================o(1) space ===================
         int n=cost.length;
-        int tab[]=new int[n+1];
-         minCostClimbingStairs(n-1,cost,tab);
-         int cost0=tab[0];
-         int cost1=tab[1];
-         return Math.min(cost0,cost1);
+        int a=0; // i+1
+        int b=0;  // i+2 
+        for(int i=n-1;i>=0;i--) {
+            int minCost=Math.min(a,b)+cost[i];
+            b=a;
+            a=minCost;
+        }
+        return Math.min(a,b);
     }
 }
