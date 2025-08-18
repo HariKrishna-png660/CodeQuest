@@ -28,34 +28,62 @@ class Solution {
     //     }
     // }
     // memoization solution .......
-    public int numDecodings(int idx,String str,int dp[]) {
-        if(idx==str.length()) {
-            return dp[idx]=1;
-        }
-        if(str.charAt(idx)=='0') {
-            return dp[idx]=0;
-        }
-        if(dp[idx]!=-1) {
-            return dp[idx];
-        }
-        int singleCharWays=numDecodings(idx+1,str,dp);
-        int twoCharWays=0;
-        if(idx+1<str.length()) {
-            int numUsing2Chars=10*(str.charAt(idx)-'0')+(str.charAt(idx+1)-'0');
+    // public int numDecodings(int idx,String str,int dp[]) {
+    //     if(idx==str.length()) {
+    //         return dp[idx]=1;
+    //     }
+    //     if(str.charAt(idx)=='0') {
+    //         return dp[idx]=0;
+    //     }
+    //     if(dp[idx]!=-1) {
+    //         return dp[idx];
+    //     }
+    //     int singleCharWays=numDecodings(idx+1,str,dp);
+    //     int twoCharWays=0;
+    //     if(idx+1<str.length()) {
+    //         int numUsing2Chars=10*(str.charAt(idx)-'0')+(str.charAt(idx+1)-'0');
 
-            if(numUsing2Chars <=26) {
-                twoCharWays=numDecodings(idx+2,str,dp);
+    //         if(numUsing2Chars <=26) {
+    //             twoCharWays=numDecodings(idx+2,str,dp);
+    //         }
+    //     }
+    //     return dp[idx]=singleCharWays+twoCharWays;
+    // }
+    // tabulation solution .....
+    public int numDecodings(int n,String str,int dp[]) {
+        for(int idx=n;idx>=0;idx--) {
+            if(idx==n) {
+                dp[idx]=1;
+                continue;
             }
+            if(str.charAt(idx)=='0') {
+                dp[idx]=0;
+                continue;
+            }
+            int singleCharWays=dp[idx+1];
+            int twoCharWays=0;
+            
+            if(idx+1<n) {
+                int numUsing2Chars=10*(str.charAt(idx)-'0') +(str.charAt(idx+1)-'0');
+                if(numUsing2Chars<=26) {
+                    twoCharWays=dp[idx+2];
+                }
+            }
+            dp[idx]=singleCharWays+twoCharWays;
         }
-        return dp[idx]=singleCharWays+twoCharWays;
+        return dp[0];
     }
     public int numDecodings(String s) {
         // numberOfWays=0;
         // numDecodings(s,"");
         // return numberOfWays;
+        // =================
+        // int n=s.length();
+        // int dp[]=new int[n+1];
+        // Arrays.fill(dp,-1);
+        // return numDecodings(0,s,dp);
         int n=s.length();
         int dp[]=new int[n+1];
-        Arrays.fill(dp,-1);
-        return numDecodings(0,s,dp);
+        return numDecodings(n,s,dp);
     }
 }
