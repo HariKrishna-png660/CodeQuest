@@ -43,30 +43,42 @@ class Solution {
     //     }
     //     return memo[target]=totalWays;
     // }
-    // memoization solution ..... using 1d dp 
-    public int coinChangeCombinationMultipleUse(int coins[],int tar,int memo[][],int idx) {
-        if(tar==0) {
-            return memo[tar][idx]=1;
+    // memoization solution ..... using 2d dp 
+    // public int coinChangeCombinationMultipleUse(int coins[],int tar,int memo[][],int idx) {
+    //     if(tar==0) {
+    //         return memo[tar][idx]=1;
+    //     }
+    //     if(memo[tar][idx]!=-1) {
+    //         return memo[tar][idx];
+    //     }
+    //     int totalWays=0;
+    //     if(tar-coins[idx]>=0) {
+    //        totalWays += coinChangeCombinationMultipleUse(coins,tar-coins[idx],memo,idx);
+    //     }
+    //     if(idx+1<coins.length) {
+    //         totalWays += coinChangeCombinationMultipleUse(coins,tar,memo,idx+1);
+    //     }
+    //     return memo[tar][idx]=totalWays;
+    // }
+    // tabulation solution using 1d dp .......
+    public int coinChangeCombinationMultipleUse(int coins[],int tar,int tab[]) {
+        tab[0]=1;
+        for(int coin:coins) {
+            for(int i=coin;i<=tar;i++) {
+                tab[i] += tab[i-coin];
+            }
         }
-        if(memo[tar][idx]!=-1) {
-            return memo[tar][idx];
-        }
-        int totalWays=0;
-        if(tar-coins[idx]>=0) {
-           totalWays += coinChangeCombinationMultipleUse(coins,tar-coins[idx],memo,idx);
-        }
-        if(idx+1<coins.length) {
-            totalWays += coinChangeCombinationMultipleUse(coins,tar,memo,idx+1);
-        }
-        return memo[tar][idx]=totalWays;
+        return tab[tar];
     }
     public int change(int amount, int[] coins) {
         // return coinChangeCombinationMultipleUse(coins,amount,0);
         // return coinChangeCombinationMultipleUse(coins,amount,0);
-        int memo[][]=new int[amount+1][coins.length+1];
-        for(int mem[]:memo) {
-            Arrays.fill(mem,-1);
-        }
-        return coinChangeCombinationMultipleUse(coins,amount,memo,0);
+        // int memo[][]=new int[amount+1][coins.length+1];
+        // for(int mem[]:memo) {
+        //     Arrays.fill(mem,-1);
+        // }
+        // return coinChangeCombinationMultipleUse(coins,amount,memo,0);
+        int tab[]=new int[amount+1];
+        return coinChangeCombinationMultipleUse(coins,amount,tab);
     }
 }
