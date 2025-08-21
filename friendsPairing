@@ -1,0 +1,84 @@
+class Solution {
+    // recursive approach.....
+    // time complexity is 2^n
+    // space complexity is O(n) 
+    public long countFriendsPairings(int n) {
+        // code here
+        if(n<=2) {
+            return n;
+        }
+        long nm1=countFriendsPairings(n-1);
+        long nm2=countFriendsPairings(n-2);
+        long totalPairings=nm1+(n-1)*nm2;
+        return totalPairings;
+    }
+}
+===============================================
+class Solution {
+    // memoization solution ...
+    // time complexity is O(n)
+    // sapce complexity is recursive space o(n) + memo array space o(n) = O(2n) =O(n)
+    public long countFriendsPairings(int n,long memo[]) {
+        if(n<=2) {
+            return memo[n]=n;
+        }
+        if(memo[n]!=-1) {
+            return memo[n];
+        }
+        long nm1=countFriendsPairings(n-1,memo);
+        long nm2=countFriendsPairings(n-2,memo);
+        long totalPairings=nm1+(n-1)*nm2;
+        return memo[n]=totalPairings;
+    }
+    public long countFriendsPairings(int n) {
+        // code here
+        long memo[]=new long[n+1];
+        Arrays.fill(memo,-1);
+        return countFriendsPairings(n,memo);
+    }
+}
+============================================
+class Solution {
+    // tabulation solution .....
+    // time complexity is O(n)
+    // space complexity is O(n)
+    public long countFriendsPairings(int n,long tab[]) {
+        for(int i=1;i<=n;i++) {
+            if(i<=2) {
+                tab[i]=i;
+                continue;
+            }
+            long nm1=tab[i-1];
+            long nm2=tab[i-2];
+            long totalPairings=nm1+(i-1)*nm2;
+            tab[i]=totalPairings;
+        }
+        return tab[n];
+    }
+    public long countFriendsPairings(int n) {
+        // code here
+        long tab[]=new long[n+1];
+        return countFriendsPairings(n,tab);
+    }
+}
+===========================================
+
+class Solution {
+    // tabulation solution .....
+    // time complexity is O(n)
+    // space complexity is O(1)
+    public long countFriendsPairings(int n) {
+        // code here
+        if(n<=2) {
+            return n;
+        }
+        int prev2=1;
+        int prev1=2;
+        for(int i=3;i<=n;i++) {
+            int ans=prev1+(i-1)*prev2;
+            prev2=prev1;
+            prev1=ans;
+        }
+        return prev1;
+    }
+}
