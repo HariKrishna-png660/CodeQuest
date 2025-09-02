@@ -1,45 +1,35 @@
 class Solution {
-    // memoization solution ......
-    // public int lengthOfLIS_rec(int nums[],int idx,int memo[]) {
-    //     if(memo[idx]!=1) {
-    //         return memo[idx];
-    //     }
-    //     int ans=1;
-    //     for(int j=idx-1;j>=0;j--) {
-    //         if(nums[j]<nums[idx]) {
-    //             ans=Math.max(ans,lengthOfLIS_rec(nums,j,memo)+1);
-    //         }
-    //     }
-    //     return memo[idx]=ans;
-    // }
-    // tabulation solution ....
-    public int lengthOfLIS_tab(int nums[]) {
-        int n=nums.length;
-        int tab[]=new int[n];
-        Arrays.fill(tab,1);
-        int res=0;
-        for(int idx=0;idx<n;idx++) {
-            int ans=1;
-            for(int j=idx-1;j>=0;j--) {
-                if(nums[j]<nums[idx]) {
-                    ans=Math.max(ans,tab[j]+1);
-                }
+    // time complexity is nlogn
+    public int findInsertionIndex(ArrayList<Integer> lis,int ele) {
+        int start=0;
+        int end=lis.size()-1;
+         while(start<=end) {
+            int mid=(start+end)/2;
+            if(lis.get(mid)==ele) {
+                return mid;
             }
-            tab[idx]=ans;
-            res=Math.max(res,ans);
-        }
-        return res;
+            else if(lis.get(mid)<ele) {
+                start=mid+1;
+            }
+            else {
+                end=mid-1;
+            }
+         }
+         return start;
     }
     public int lengthOfLIS(int[] nums) {
-        // int n=nums.length;
-        // int memo[]=new int[n];
-        // Arrays.fill(memo,1);
-        // int ans=0;
-        // for(int i=n-1;i>=0;i--) {
-        //     ans=Math.max(ans,lengthOfLIS_rec(nums,i,memo));
-        // }
-        // return ans;
         int n=nums.length;
-        return lengthOfLIS_tab(nums);
+        ArrayList<Integer> lis=new ArrayList<>();
+        for(int i=0;i<n;i++) {
+            int ele=nums[i];
+            int idx=findInsertionIndex(lis,ele);
+            if(idx==lis.size()) {
+                lis.add(ele);
+            }
+            else {
+                lis.set(idx,ele);
+            }
+        }
+        return lis.size();
     }
 }
