@@ -79,30 +79,52 @@ class Solution {
     // =======================================
     // tabulation with space optimisation ......
     // time complexity - O(nXm)
-    // space complexit -O(n)
+    // space complexity -O(n)
     public int uniquePaths_opt(int m,int n) {
-        int dp[]=new int[m];
-        dp[m-1]=1;
-        for(int j=n-1;j>=0;j--) {
-            int newCol[]=new int[m];
-            for(int i=m-1;i>=0;i--) {
+        // int dp[]=new int[m];
+        // dp[m-1]=1;
+        // for(int j=n-1;j>=0;j--) {
+        //     int newCol[]=new int[m];
+        //     for(int i=m-1;i>=0;i--) {
+        //         if(i==m-1 && j==n-1) {
+        //             newCol[i]=1;
+        //         }
+        //         else {
+        //             int totalWays=0;
+        //             if(i+1<m) {
+        //                 totalWays += newCol[i+1];
+        //             }
+        //             if(j+1<n) {
+        //                 totalWays += dp[i];
+        //             }
+        //             newCol[i]=totalWays;
+        //         }
+        //     }
+        //     dp=newCol;
+        // }
+        // return dp[0];
+        
+        int dp[]=new int[n];
+        dp[n-1]=1;
+        for(int i=m-1;i>=0;i--) {
+            int newRow[]=new int[n];
+            for(int j=n-1;j>=0;j--) {
                 if(i==m-1 && j==n-1) {
-                    newCol[i]=1;
+                    newRow[j]=1;
+                    continue;
                 }
-                else {
-                    int totalWays=0;
-                    if(i+1<m) {
-                        totalWays += newCol[i+1];
-                    }
-                    if(j+1<n) {
-                        totalWays += dp[i];
-                    }
-                    newCol[i]=totalWays;
+                int totalWays=0;
+                if(i+1<m) {
+                    totalWays += dp[j];
                 }
+                if(j+1<n) {
+                    totalWays += newRow[j+1];
+                }
+               newRow[j]=totalWays;
             }
-            dp=newCol;
+            dp=newRow;
         }
-        return dp[0];
+       return dp[0];
     }
     public int uniquePaths(int m, int n) {
         // int dp[][]=new int[m][n];
