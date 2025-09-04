@@ -35,47 +35,80 @@ class Solution {
     //     }
     //     return dp[sr][sc]=totalWays;
     // }
-    public static int uniquePaths(int dp[][],int m,int n) {
-        // for(int j=n-1;j>=0;j--) {
-        //     for(int i=m-1;i>=0;i--) {
-        //         if(i==m-1 && j==n-1) {
-        //              dp[i][j]=1;
-        //              continue;
-        //         }
-        //         int totalWays=0;
-        //         if(i+1<m) {
-        //             totalWays += dp[i+1][j];
-        //         }
-        //         if(j+1<n) {
-        //             totalWays += dp[i][j+1];
-        //         }
-        //         dp[i][j]=totalWays;
-        //     }
-        // }
-        // return dp[0][0];
+    // ===========================================
+    // tabulation solution .....
+    // time complexity - O(nXm)
+    // space complexity -O(nxm)
+    // public static int uniquePaths(int dp[][],int m,int n) {
+    //     // for(int j=n-1;j>=0;j--) {
+    //     //     for(int i=m-1;i>=0;i--) {
+    //     //         if(i==m-1 && j==n-1) {
+    //     //              dp[i][j]=1;
+    //     //              continue;
+    //     //         }
+    //     //         int totalWays=0;
+    //     //         if(i+1<m) {
+    //     //             totalWays += dp[i+1][j];
+    //     //         }
+    //     //         if(j+1<n) {
+    //     //             totalWays += dp[i][j+1];
+    //     //         }
+    //     //         dp[i][j]=totalWays;
+    //     //     }
+    //     // }
+    //     // return dp[0][0];
 
-        for(int i=m-1;i>=0;i--) {
-            for(int j=n-1;j>=0;j--) {
+    //     for(int i=m-1;i>=0;i--) {
+    //         for(int j=n-1;j>=0;j--) {
+    //             if(i==m-1 && j==n-1) {
+    //                 dp[i][j]=1;
+    //                 continue;
+    //             }
+    //             int totalWays=0;
+    //             if(i+1<m) {
+    //                 totalWays += dp[i+1][j];
+    //             }
+    //             if(j+1<n) {
+    //                 totalWays += dp[i][j+1];
+    //             }
+    //             dp[i][j]=totalWays;
+    //         }
+    //     }
+    //     return dp[0][0];
+    // }
+    // =======================================
+    // tabulation with space optimisation ......
+    // time complexity - O(nXm)
+    // space complexit -O(n)
+    public int uniquePaths_opt(int m,int n) {
+        int dp[]=new int[m];
+        dp[m-1]=1;
+        for(int j=n-1;j>=0;j--) {
+            int newCol[]=new int[m];
+            for(int i=m-1;i>=0;i--) {
                 if(i==m-1 && j==n-1) {
-                    dp[i][j]=1;
-                    continue;
+                    newCol[i]=1;
                 }
-                int totalWays=0;
-                if(i+1<m) {
-                    totalWays += dp[i+1][j];
+                else {
+                    int totalWays=0;
+                    if(i+1<m) {
+                        totalWays += newCol[i+1];
+                    }
+                    if(j+1<n) {
+                        totalWays += dp[i];
+                    }
+                    newCol[i]=totalWays;
                 }
-                if(j+1<n) {
-                    totalWays += dp[i][j+1];
-                }
-                dp[i][j]=totalWays;
             }
+            dp=newCol;
         }
-        return dp[0][0];
+        return dp[0];
     }
     public int uniquePaths(int m, int n) {
         // int dp[][]=new int[m][n];
         // return uniquePaths(0,0,m-1,n-1,dp);
-        int dp[][]=new int[m][n];
-        return uniquePaths(dp,m,n);
+        // int dp[][]=new int[m][n];
+        // return uniquePaths(dp,m,n);
+        return uniquePaths_opt(m,n);
     }
 }
