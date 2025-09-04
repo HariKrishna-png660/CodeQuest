@@ -36,11 +36,29 @@ class Solution {
     //     return dp[sr][sc]=totalWays;
     // }
     public static int uniquePaths(int dp[][],int m,int n) {
-        for(int j=n-1;j>=0;j--) {
-            for(int i=m-1;i>=0;i--) {
+        // for(int j=n-1;j>=0;j--) {
+        //     for(int i=m-1;i>=0;i--) {
+        //         if(i==m-1 && j==n-1) {
+        //              dp[i][j]=1;
+        //              continue;
+        //         }
+        //         int totalWays=0;
+        //         if(i+1<m) {
+        //             totalWays += dp[i+1][j];
+        //         }
+        //         if(j+1<n) {
+        //             totalWays += dp[i][j+1];
+        //         }
+        //         dp[i][j]=totalWays;
+        //     }
+        // }
+        // return dp[0][0];
+
+        for(int i=m-1;i>=0;i--) {
+            for(int j=n-1;j>=0;j--) {
                 if(i==m-1 && j==n-1) {
-                     dp[i][j]=1;
-                     continue;
+                    dp[i][j]=1;
+                    continue;
                 }
                 int totalWays=0;
                 if(i+1<m) {
