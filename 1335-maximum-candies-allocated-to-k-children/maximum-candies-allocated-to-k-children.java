@@ -8,7 +8,7 @@ class Solution {
     }
     public int maximumCandies(int[] candies, long k) {
         int min=1;
-        int max=(int)(1e7);
+        int max=(int)(1e7); // this can also be the largest value in the array
         int maxPossible=0;
         while(min<=max) {
             int mid=(min+max)/2;
