@@ -7,12 +7,12 @@ class Solution {
         while(si<=ei) {
             int mid=(si+ei)/2;
             if(nums[mid]==target) {
-                firstIndex=mid;
-                ei=mid-1;
+               firstIndex=mid;
+               ei=mid-1;
             }
             else if(nums[mid]<target) {
                 si=mid+1;
-            } 
+            }
             else {
                 ei=mid-1;
             }
