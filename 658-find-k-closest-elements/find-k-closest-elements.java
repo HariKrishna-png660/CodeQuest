@@ -20,22 +20,22 @@ class Solution {
         for(int val:arr) {
             list.add(val);
         }
-        if(x<arr[0]) {
+        if(x<arr[0]) {           // if the target element is smaller than all the elements in the array 
             return list.subList(0,k);
         }
-        if(x>arr[n-1]) {
+        if(x>arr[n-1]) {         // if the target element is greater than all the elements in the array
             return list.subList(n-k,n);
         }
 
-        int idx=binarySearch(arr,x);
+        int idx=binarySearch(arr,x);  // find the insertion position of the target element
 
-        int si=Math.max(0,idx-k);
-        int ei=Math.min(n-1,idx+k);
-        while((ei-si+1)>k) {
-            if((x-arr[si])<=(arr[ei]-x)) {
+        int si=Math.max(0,idx-k);  // if there are no enough elements forward 
+        int ei=Math.min(n-1,idx+k); // if there are no extra elements backward 
+        while((ei-si+1)>k) {  // take the window with k+1 elements forward and k+1 elements backward 
+            if((x-arr[si])<=(arr[ei]-x)) {   // minimizing the window by moving  ei towards left
                 ei--;
             }
-            else {
+            else {    // minimizing the window by moving si towards right 
                 si++;
             }
         }
