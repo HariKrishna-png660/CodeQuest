@@ -11,13 +11,13 @@ class Solution {
         }
         while(si<ei) {
             int mid=(si+ei)/2;
-             if(nums[mid]<target) {
+            if(nums[mid]<target) {
                 si=mid+1;
-             }
-             else {
+            }
+            else {
                 ei=mid;
-             }
+            }
         }
-        return si;
+        return si; // return ei also will work......
     }
 }
