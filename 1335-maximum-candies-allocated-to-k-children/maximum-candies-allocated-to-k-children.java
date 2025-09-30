@@ -1,5 +1,6 @@
 class Solution {
     // this is one of the problem in which we find ans by doing binary search on the answer 
+    // this is basically maximizing the minimum....
     public boolean isPossible(int candies[],int min,long k) {
         int n=candies.length;
         for(int i=0;i<n;i++) {
