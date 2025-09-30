@@ -1,4 +1,5 @@
 class Solution {
+    // this is one of the problem in which we find ans by doing binary search on the answer 
     public boolean isPossible(int candies[],int min,long k) {
         int n=candies.length;
         for(int i=0;i<n;i++) {
@@ -10,9 +11,9 @@ class Solution {
     public int maximumCandies(int[] candies, long k) {
         int n=candies.length;
         int left=1;
-        int right=(int)(1e7);
+        int right=(int)(1e7);  // can also be optimised 
         int maxCandies=0;
-        while(left<=right) {
+        while(left<=right) {    // time complexity is O(n log n)
             int mid=(left+right)/2;
             if(isPossible(candies,mid,k)) {
                 maxCandies=mid;
