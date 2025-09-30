@@ -1,4 +1,5 @@
 class Solution {
+    // this is one of the problem in which we doing binary search on the answer
     // this is a problem in which we need to minimize the maximum
     public boolean isPossible(int bloomDay[],int min,int m,int k) {
         int n=bloomDay.length;
@@ -22,7 +23,7 @@ class Solution {
         int si=1;
         int ei=(int)(1e9);
         int minDay=-1;
-        while(si<=ei) {
+        while(si<=ei) {      // time complexity is O(n log n)
             int mid=(si+ei)/2;
             if(isPossible(bloomDay,mid,m,k)) {
                 minDay=mid;
