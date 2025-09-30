@@ -1,25 +1,27 @@
 class Solution {
-    public boolean isPossible(int candies[],long k,int X) {
-          for(int c:candies) {
-            int piles=c/X;
-            k-=piles;
-          }
-          return k<=0;
+    public boolean isPossible(int candies[],int min,long k) {
+        int n=candies.length;
+        for(int i=0;i<n;i++) {
+            int val=candies[i]/min;
+            k-=val;
+        }
+        return k<=0;
     }
     public int maximumCandies(int[] candies, long k) {
-        int min=1;
-        int max=(int)(1e7); // this can also be the largest value in the array
-        int maxPossible=0;
-        while(min<=max) {
-            int mid=(min+max)/2;
-            if(isPossible(candies,k,mid)) {
-                maxPossible=mid;
-                min=mid+1;
+        int n=candies.length;
+        int left=1;
+        int right=(int)(1e7);
+        int maxCandies=0;
+        while(left<=right) {
+            int mid=(left+right)/2;
+            if(isPossible(candies,mid,k)) {
+                maxCandies=mid;
+                left=mid+1;
             }
             else {
-                max=mid-1;
+                right=mid-1;
             }
         }
-       return maxPossible;
+        return maxCandies;
     }
 }
