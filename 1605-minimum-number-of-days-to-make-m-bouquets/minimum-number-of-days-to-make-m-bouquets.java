@@ -1,36 +1,35 @@
 class Solution {
-    public boolean isPossible(int arr[],int m,int k,int v) {
+    // this is a problem in which we need to minimize the maximum
+    public boolean isPossible(int bloomDay[],int min,int m,int k) {
+        int n=bloomDay.length;
         int count=0;
-
-        for(int i=0;i<arr.length;i++) {
-            if(arr[i]<=v) {
+        for(int i=0;i<n;i++) {
+            int val=bloomDay[i];
+            if(val<=min) {
                 count++;
                 if(count==k) {
-                   m--;
-                   count=0;
-               }
+                    m--;
+                    count=0;
+                }
             }
             else {
                 count=0;
             }
-           if(m==0) {
-            return true;
-           } 
         }
-        return false;
+        return m<=0;
     }
     public int minDays(int[] bloomDay, int m, int k) {
-        int min=1;
-        int max=(int)(1e9);
+        int si=1;
+        int ei=(int)(1e9);
         int minDay=-1;
-        while(min<=max) {
-            int mid=(min+max)/2;
-            if(isPossible(bloomDay,m,k,mid)) {
-                max=mid-1;
+        while(si<=ei) {
+            int mid=(si+ei)/2;
+            if(isPossible(bloomDay,mid,m,k)) {
                 minDay=mid;
+                ei=mid-1;
             }
             else {
-                min=mid+1;
+                si=mid+1;
             }
         }
         return minDay;
