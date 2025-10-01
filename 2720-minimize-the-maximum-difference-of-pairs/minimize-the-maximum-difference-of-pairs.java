@@ -15,7 +15,7 @@ class Solution {
         Arrays.sort(nums);
         int n=nums.length;
         int low=0;
-        int high=(int)(1e9);
+        int high=(int)(1e9); // this can also be nums[n-1]-nums[0]
         int minDis=0;
         while(low<=high) {
             int mid=(low+high)/2;
