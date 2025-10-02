@@ -8,11 +8,11 @@ class Solution {
     
     // si will correct the window by moving any steps forward so that every character occurs once in the window
     public int lengthOfLongestSubstring(String s) {
+        int n=s.length();
         int si=0;
         int ei=0;
-        int len=0;
         int count=0;
-        int n=s.length();
+        int maxLen=0;
         int freq[]=new int[128];
         while(ei<n) {
             if(freq[s.charAt(ei)]==1) {
@@ -27,8 +27,8 @@ class Solution {
                 freq[s.charAt(si)]--;
                 si++;
             }
-            len=Math.max(len,ei-si);
+            maxLen=Math.max(maxLen,ei-si);
         }
-        return len;
+        return maxLen;
     }
 }
