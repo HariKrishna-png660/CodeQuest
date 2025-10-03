@@ -23,7 +23,7 @@ class Solution {
                 si++;
             }
              
-            while(ei-si>k) {
+             if(ei-si>k) {
                 freq[nums[si]]--;
                 sum -= nums[si];
                 si++;
