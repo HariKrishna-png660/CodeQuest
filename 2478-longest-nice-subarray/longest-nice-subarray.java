@@ -2,23 +2,23 @@ class Solution {
     // =====================BRUTE FORCE APPROACHES======================================================================================
     // ONLY BITMASK
     // TIME COMPLEXITY IS O(N^2)
-    public int longestNiceSubarray(int nums[]) {
-        int n=nums.length;
-        int maxLength=1;
-        for(int i=0;i<n;i++) {
-            int mask=0;
-            for(int j=i;j<n;j++) {
-                if((mask & nums[j])==0) {
-                    mask=mask|nums[j];
-                    maxLength=Math.max(maxLength,j-i+1);
-                }
-                else {
-                    break;
-                }
-            }
-        }
-        return maxLength;
-    }
+    // public int longestNiceSubarray(int nums[]) {
+    //     int n=nums.length;
+    //     int maxLength=1;
+    //     for(int i=0;i<n;i++) {
+    //         int mask=0;
+    //         for(int j=i;j<n;j++) {
+    //             if((mask & nums[j])==0) {
+    //                 mask=mask|nums[j];
+    //                 maxLength=Math.max(maxLength,j-i+1);
+    //             }
+    //             else {
+    //                 break;
+    //             }
+    //         }
+    //     }
+    //     return maxLength;
+    // }
     // ====================(BINARY SEARCH ON THE ANSWER + SLIDING WINDOW) ==============================================================
     // TIME COMPLEXITY IS O(N^2 LOGN)
     // // maximise the minimum
@@ -58,4 +58,23 @@ class Solution {
     //     }
     //     return ans;
     // }
+    //========================OPTIMISED APPROACH (SLIDING WINDOW + BIT MASK)=================================================
+    // TIME COMPLEXITY IS O(N)
+    public int longestNiceSubarray(int nums[]) {
+        int n=nums.length;
+        int si=0;
+        int ei=0;
+        int mask=0;
+        int maxLength=1;
+        while(ei<n) {
+            while((mask & nums[ei])!=0) {
+                mask = mask ^ nums[si];
+                si++;
+            }
+            mask = mask | nums[ei];
+            ei++;
+            maxLength=Math.max(maxLength,ei-si);
+        }
+        return maxLength;
+    }
 }
