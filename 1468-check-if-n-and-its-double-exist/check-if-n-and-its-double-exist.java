@@ -6,10 +6,15 @@ class Solution {
             int mid = (si + ei) / 2;
             if (arr[mid] == tar) {
                
-                if (mid != excludeIndex) return true;
-                
-                if (mid > 0 && arr[mid - 1] == tar) return true;
-                if (mid < arr.length - 1 && arr[mid + 1] == tar) return true;
+                if (mid != excludeIndex) {
+                      return true;
+                }
+                if (mid > 0 && arr[mid - 1] == tar) {
+                    return true;
+                }
+                if (mid < arr.length - 1 && arr[mid + 1] == tar) {
+                    return true;
+                }
                 return false;
             } else if (arr[mid] < tar) {
                 si = mid + 1;
