@@ -20,12 +20,12 @@ class Solution {
     //     }
     //     return nums[si];
     // }
-    public int findMin(int[] nums) {
-  int si = 0, ei = nums.length - 1;
-    int ans = nums[0];
+     public int findMin(int[] nums) {
+            int si = 0, ei = nums.length - 1;
+            int ans = nums[0];
 
-    while (si <= ei) {
-        int mid = si + (ei - si) / 2;
+             while (si <= ei) {
+                  int mid = si + (ei - si) / 2;
 
         // If the current window is already sorted,
         // then nums[si] is the minimum in this range.
