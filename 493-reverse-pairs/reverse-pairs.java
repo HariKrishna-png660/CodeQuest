@@ -43,7 +43,7 @@ class Solution {
         int right[]=mergeSort(arr,mid+1,ei);
         int j = 0;
         for (int i = 0; i < left.length; i++) {
-           while (j < right.length && (long) left[i] > 2L* right[j]) {
+           while (j < right.length && (long) (left[i]) > 2L* (long)right[j]) {
                   j++;
               }
              invCount += j;
