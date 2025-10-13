@@ -1,4 +1,13 @@
 class Solution {
+    /*
+        TEST CASE EXPLANATION:
+          candies = [5,8,6], k = 3
+          when ans=2 then we can distribute to 3 children easily
+          when ans=3 then we can distribute to 3 children easily
+          when ans=4 then we can distribute to 3 children easily
+          when ans=5 then we can distribute to exactly 3 children 
+          when ans=6 then we can distribute to exactly 2 children 
+    */
     // // this is one of the problem in which we find ans by doing binary search on the answer 
     // // this is basically maximizing the minimum....
     // public boolean isPossible(int candies[],int min,long k) {
