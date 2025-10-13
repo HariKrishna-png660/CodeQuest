@@ -53,6 +53,8 @@ class Solution {
         return m<=0;
     }
     public int minDays(int[] bloomDay, int m, int k) {
+        // binary search on the answer
+        // minimize the maximum answer
          int low=1; // when bloomDay={1} m=1 and k=1
          int high=(int)(1e9); // when bloomDay={10^9} m=1 and k=1
          int ans=-1;
