@@ -6,20 +6,11 @@ class Solution {
             int rem=((nums[i]%value)+value)%value;
             map.put(rem,map.getOrDefault(rem,0)+1);
           }
-          for(int i=0;i<n;i++) {
-             int r=i%value;
-             if(map.containsKey(r)) {
-                 if(map.get(r)==1) {
-                    map.remove(r);
-                 }
-                 else {
-                    map.put(r,map.get(r)-1);
-                 }
-             }
-             else {
-                return i;
-             }
+          int MEX=0;
+          while(map.getOrDefault(MEX % value,0)>0) {
+            map.put(MEX % value,map.get(MEX % value)-1);
+             MEX++;
           }
-          return n;
+          return MEX;
     }
 }
