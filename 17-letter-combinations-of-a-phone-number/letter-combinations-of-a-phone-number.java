@@ -1,23 +1,22 @@
 class Solution {
-    // create an array of strings
     static String letters[]={"/",".","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
-    public List<String> letterCombinations(String digits) {
+    public void letterCombinations(String digits,String sub,List<String> ans) {
         if(digits.length()==0) {
-            ArrayList<String> baseAns=new ArrayList<>();
-            baseAns.add("");
-            return baseAns;
+            ans.add(sub);
+            return;
         }
         char firstChar=digits.charAt(0);
         String remString=digits.substring(1);
-        List<String> smallAns=letterCombinations(remString);
-        List<String> ans=new ArrayList<>();
-        String currString=letters[firstChar-'0'];
-        for(int i=0;i<currString.length();i++) {
-            char letter=currString.charAt(i);
-            for(String s:smallAns) {
-                ans.add(letter+s);
-            } 
+        int index=firstChar-'0';
+        String letter=letters[index];
+        for(int i=0;i<letter.length();i++) {
+            char ch=letter.charAt(i);
+            letterCombinations(remString,sub+ch,ans);
         }
+    }
+    public List<String> letterCombinations(String digits) {
+        List<String> ans=new ArrayList<>();
+        letterCombinations(digits,"",ans);
         return ans;
     }
 }
