@@ -6,12 +6,19 @@ class Solution {
             p=p*2;
             ans.add(p-1);
         }
-        for(int i=0;i<ans.size();i++) {
-            int val=ans.get(i);
-            if(n<=val) {
-                return val;
+        int low=0;
+        int high=ans.size()-1;
+        int smallNum=0;
+        while(low<=high) {
+            int mid=(low+high)/2;
+            if(ans.get(mid)>=n) {
+               smallNum=ans.get(mid);
+               high=mid-1;
+            }
+            else {
+                low=mid+1;
             }
         }
-        return -1;
+        return smallNum;
     }
 }
