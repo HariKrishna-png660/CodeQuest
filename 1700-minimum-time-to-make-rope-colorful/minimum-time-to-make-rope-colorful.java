@@ -1,9 +1,6 @@
 class Solution {
     public int minCost(String colors, int[] neededTime) {
         int n=colors.length();
-        if(n==1) {
-            return 0;
-        }
         int pre=neededTime[0];
         int time=0;
      
