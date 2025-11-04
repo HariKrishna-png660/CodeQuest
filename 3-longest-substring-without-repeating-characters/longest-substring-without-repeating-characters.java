@@ -33,20 +33,22 @@ class Solution {
         int n=s.length();
         int si=0;
         int ei=0;
-        int maxLen=0;
         int count=0;
-        int freq[]=new int[128];
+        int freq[]=new int[128]; // considering all the letters digits symbols and spaces
+        int maxLen=0;
         while(ei<n) {
-            if(freq[s.charAt(ei)]==1) {
+            char ch=s.charAt(ei);
+            if(freq[ch]==1) {
                 count++;
             }
-            freq[s.charAt(ei)]++;
+            freq[ch]++;
             ei++;
             while(count>0) {
-                if(freq[s.charAt(si)]==2) {
+                char sch=s.charAt(si);
+                if(freq[sch]==2) {
                     count--;
                 }
-                freq[s.charAt(si)]--;
+                freq[sch]--;
                 si++;
             }
             maxLen=Math.max(maxLen,ei-si);
