@@ -30,25 +30,23 @@ class Solution {
         //     maxLen=Math.max(maxLen,ei-si);
         // }
         // return maxLen;
-        int n=s.length();
         int si=0;
         int ei=0;
+        int n=s.length();
+        int freq[]=new int[128];
         int count=0;
-        int freq[]=new int[128]; // considering all the letters digits symbols and spaces
         int maxLen=0;
         while(ei<n) {
-            char ch=s.charAt(ei);
-            if(freq[ch]==1) {
+            if(freq[s.charAt(ei)]==1) {
                 count++;
             }
-            freq[ch]++;
-            ei++;
+            freq[s.charAt(ei)]++;
+             ei++;
             while(count>0) {
-                char sch=s.charAt(si);
-                if(freq[sch]==2) {
+                if(freq[s.charAt(si)]==2) {
                     count--;
                 }
-                freq[sch]--;
+                freq[s.charAt(si)]--;
                 si++;
             }
             maxLen=Math.max(maxLen,ei-si);
