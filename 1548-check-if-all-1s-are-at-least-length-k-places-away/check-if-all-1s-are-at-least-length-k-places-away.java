@@ -1,20 +1,20 @@
 class Solution {
     public boolean kLengthApart(int[] nums, int k) {
         int n=nums.length;
-        ArrayList<Integer> indices=new ArrayList<>();
+        int lastOne=-1;
         for(int i=0;i<n;i++) {
-            int val=nums[i];
-            if(val==1) {
-                indices.add(i);
-            }
-        }
-        int m=indices.size();
-        for(int i=1;i<m;i++) {
-                int diff=indices.get(i)-indices.get(i-1);
-                if(diff-1<k) {
-                    return false;
+             if(nums[i]==1) {
+                if(lastOne==-1) {
+                    lastOne=i;
                 }
-            
+                else {
+                    int diff=i-lastOne-1;
+                    if(diff<k) {
+                        return false;
+                    }
+                    lastOne=i;
+                }
+             }
         }
         return true;
     }
