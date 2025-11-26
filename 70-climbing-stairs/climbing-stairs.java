@@ -58,16 +58,19 @@ class Solution {
     // time complexity is O(n)
     // space complexity is O(1)
     public int climbStairs(int n) {
-        if(n<=2) {
-            return n;
+        int dp[]=new int[n+1];
+        for(int i=0;i<dp.length;i++) {
+            if(i<=2) {
+               dp[i]=i;
+               continue;
+            }
+            if(dp[i]!=0) {
+                return dp[i];
+            }
+            int oneStep=dp[i-1];
+            int twoSteps=dp[i-2];
+            dp[i]=oneStep+twoSteps;
         }
-        int prev2=1;
-        int prev1=2;
-        for(int i=3;i<=n;i++) {
-            int ans=prev2+prev1;
-            prev2=prev1;
-            prev1=ans;
-        }
-        return prev1;
+        return dp[n];
     } 
 }
