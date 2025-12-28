@@ -43,8 +43,8 @@ class Solution {
     // }
     // ===========TIME COMPLEXITY IS O(N+M)=============
     public int countNegatives(int[][] grid) {
-        int n=grid[0].length;
         int m=grid.length;
+        int n=grid[0].length;
         int row=m-1;
         int col=0;
         int ans=0;
@@ -52,7 +52,7 @@ class Solution {
             if(grid[row][col]>=0) {
                 col++;
             }
-           else {
+            else {
                 ans += (n-col);
                 row--;
             }
