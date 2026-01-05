@@ -45,43 +45,46 @@ class Solution {
         int n=arr.length;
         int si=0;
         int ei=n-1;
+        int ans=-1;
         while(si<=ei) {
-          int mid=(si+ei)/2;
-          if(arr[mid]==tar) {
-            return mid;
-          }
-          else if(arr[mid]<tar) {
-            si=mid+1;
-          }
-          else {
-            ei=mid-1;
-          }
-        }
-        return ei;
-    }
-    public List<Integer> findClosestElements(int[] arr, int k, int x) {
-        int n=arr.length;
-        List<Integer> list=new ArrayList<>();
-        for(int i=0;i<n;i++) {
-            list.add(arr[i]);
-        }
-        if(x<arr[0]) {
-            return list.subList(0,k);
-        }
-        else if(x>arr[n-1]) {
-            return list.subList(n-k,n);
-        } 
-        int idx=binarySearch(arr,x);
-        int si=Math.max(0,idx-k);
-        int ei=Math.min(n-1,idx+k);
-        while((ei-si+1)>k) {
-            if((x-arr[si]) <= (arr[ei]-x)) {
-                ei--;
+            int mid=(si+ei)/2;
+            if(arr[mid]>=tar) {
+                ans=mid;
+                ei=mid-1;
             }
             else {
-                si++;
+                si=mid+1;
             }
         }
-        return list.subList(si,ei+1);
+        return ans;
+    }
+    public List<Integer> findClosestElements(int[] arr, int k, int x) {
+         int n=arr.length;
+         List<Integer> list=new ArrayList<>();
+         for(int i=0;i<n;i++) {
+            list.add(arr[i]);
+         }
+         if(x<list.get(0)) {
+            return list.subList(0,k);
+         }
+         else if(x>list.get(n-1)) {
+            return list.subList(n-k,n);
+         }
+         else {
+            int pos=binarySearch(arr,x);
+            int si=Math.max(0,pos-k); 
+            int ei=Math.min(pos+k,n-1);
+            while((ei-si+1)>k) {
+                int valAtSi=list.get(si);
+                int valAtEi=list.get(ei);
+                if(x-valAtSi<=valAtEi-x) {
+                    ei--;
+                }
+                else {
+                    si++;
+                }
+            }
+            return list.subList(si,ei+1);
+         }
     }
 }
