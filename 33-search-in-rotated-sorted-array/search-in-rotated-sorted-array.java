@@ -33,30 +33,37 @@ class Solution {
     //     return -1;
     // }
     public int search(int[] nums, int target) {
+        // dry run on these four scenaarios
+        // nums[]=[5 6 9 0 3 4] if both the arrays are sorted equally on both sides
+                // 0  1 2  3 4 5 6 7 8 9 10 11 12 13 14 15 16
+        // nums[]=[15 19 0 1 2 3 4 5 6 7  8  9  10 11 12 13 14]
+        // searching the target in unsorted array contains some part as sorted and some part as unsorted so agin we relay on sorted.
         int n=nums.length;
         int si=0;
         int ei=n-1;
         while(si<=ei) {
-            int mid=(si+ei)/2;
-            if(nums[mid]==target) {
+             int mid=(si+ei)/2;
+             if(nums[mid]==target) {
                 return mid;
-            }
-            else if(nums[mid]>=nums[si]) {
+             }
+             else if(nums[si]<=nums[mid]) { // left sise half is sorted  and target may or may not exist here
+                 // checking for the target
                  if(nums[si]<=target && nums[mid]>target) {
-                     ei=mid-1;
+                    ei=mid-1;
                  }
                  else {
                     si=mid+1;
                  }
-            }
-            else {
+             }
+             else {  
+                // check whether 
                 if(nums[mid]<target && nums[ei]>=target) {
                     si=mid+1;
                 }
                 else {
                     ei=mid-1;
                 }
-            }
+             }
         }
         return -1;
     }
