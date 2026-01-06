@@ -38,30 +38,32 @@ class Solution {
         int si=0;
         int ei=n-1;
         while(si<=ei) {
-            int mid=(si+ei)/2;
-            if(nums[mid]==target || nums[si]==target) {
+             int mid=(si+ei)/2;
+             if(nums[mid]==target || nums[si]==target) {
                 return true;
-            }
-            else if(nums[si]<nums[ei]) {
-                if(nums[si]<=target && nums[mid]>target) {
+             }
+             else if(nums[si]<nums[mid]) { // left sise half is sorted  and target may or may not exist here
+                 // checking for the target
+                 if(nums[si]<=target && nums[mid]>target) {
                     ei=mid-1;
-                }
-                else {
+                 }
+                 else {
                     si=mid+1;
-                }
-            }
-            else if(nums[mid]<nums[ei]) {
+                 }
+             }
+             else if(nums[mid]<nums[ei]) {  
+                // check whether 
                 if(nums[mid]<target && nums[ei]>=target) {
                     si=mid+1;
                 }
                 else {
-                    ei=mid-1;  
+                    ei=mid-1;
                 }
-            }
-            else {
+             }
+             else {
                 si++;
-            }
-         }
-         return false;
+             }
+        }
+        return false;
      }
 }
