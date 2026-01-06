@@ -6,15 +6,15 @@ class Solution {
         while(si<ei) {
             int mid=(si+ei)/2;
             if(nums[mid]>nums[ei]) {
-                si=mid+1;
+                 si=mid+1;
             }
-            else if(nums[si]>nums[mid]) {
+            else if(nums[mid]<nums[si]) {
                 ei=mid;
             }
             else {
                 ei--;
             }
         }
-        return nums[ei];
+        return nums[si];
     }
 }
