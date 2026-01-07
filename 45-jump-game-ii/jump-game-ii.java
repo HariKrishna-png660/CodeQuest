@@ -1,26 +1,26 @@
 class Solution {
-    public int jump_memo(int nums[],int dp[],int index,int n) {
-        if(index==n) {
-            return 0;
+    public int jump_rec(int nums[],int index,int dp[]) {
+        if(index==nums.length-1) {
+            return dp[nums.length-1]=0;
         }
         if(dp[index]!=-1) {
             return dp[index];
         }
-        int ans=Integer.MAX_VALUE;
+        int minJumps=Integer.MAX_VALUE;
         for(int i=1;i<=nums[index];i++) {
-            if(index+i<=n) {
-                int next=jump_memo(nums,dp,index+i,n);
-                if(next!=Integer.MAX_VALUE) {
-                   ans=Math.min(ans,next+1);
-                } 
+            if(i+index<nums.length) {
+                int nextJumps=jump_rec(nums,i+index,dp);
+                if(nextJumps!=Integer.MAX_VALUE) {
+                  minJumps=Math.min(minJumps,nextJumps+1);
+                }
             }
         }
-        return dp[index]=ans;
+        return dp[index]=minJumps;
     }
     public int jump(int[] nums) {
         int n=nums.length;
         int dp[]=new int[n];
         Arrays.fill(dp,-1);
-        return jump_memo(nums,dp,0,n-1);
+        return jump_rec(nums,0,dp);
     }
 }
