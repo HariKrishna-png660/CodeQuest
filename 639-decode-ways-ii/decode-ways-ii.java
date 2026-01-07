@@ -2,32 +2,31 @@ class Solution {
     static int MOD=1000000007;
     public int numDecodings(String s) {
         int n=s.length();
-        long dp[]=new long[n+1];
-        dp[n]=1;
+        long firstNextStep=1;
+        long secondNextStep=0;
         for(int i=n-1;i>=0;i--) {
             char ch1=s.charAt(i);
-            if(ch1=='0') {
-                continue;
-            }
-            dp[i] += (ch1=='*' ? 9*dp[i+1]:dp[i+1]);
-            dp[i]=dp[i]%MOD;
-            if(i+1<n) {
+            long current=0;
+              if(ch1!='0') {
+                   current=(ch1=='*' ? 9*firstNextStep:firstNextStep);
+                    current=current%MOD;
+               if(i+1<n) {
                 char ch2=s.charAt(i+1);
                 if(ch2=='*' && ch1=='*') {
-                    dp[i] += (15*dp[i+2]);
-                     dp[i]=dp[i]%MOD;
+                    current += (15*secondNextStep);
+                     current=current%MOD;
                 }
                 else if(ch2=='*' && ch1=='1') {
-                    dp[i] += 9*dp[i+2];
-                      dp[i]=dp[i]%MOD;
+                   current += 9*secondNextStep;
+                   current=current%MOD;
                 }
                 else if(ch2=='*' && ch1=='2') {
-                    dp[i] += 6*dp[i+2];
-                     dp[i]=dp[i]%MOD;
+                    current += 6*secondNextStep;
+                    current=current%MOD;
                 }
                 else if(ch1=='*') {
-                    dp[i] += (ch2<='6' ? 2*dp[i+2] :dp[i+2]);
-                      dp[i]=dp[i]%MOD;
+                    current += (ch2<='6' ? 2*secondNextStep :secondNextStep);
+                      current=current%MOD;
                 }
                 else if(ch2=='*' && ch1>='3') {
 
@@ -36,12 +35,15 @@ class Solution {
                     String sub=s.substring(i,i+2);
                     int val=Integer.parseInt(sub);
                     if(val<=26) {
-                        dp[i] += (dp[i+2]);
+                        current += (secondNextStep);
                     }
-                     dp[i]=dp[i]%MOD;
+                     current=current%MOD;
                 }
             }
+              }
+            secondNextStep=firstNextStep;
+            firstNextStep=current;
         }
-        return (int)dp[0]%MOD;
+        return (int)firstNextStep%MOD;
     }
 }
