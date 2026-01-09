@@ -39,9 +39,27 @@ class Solution {
          }
          return dp[idx]=res;
     }
+    public int minCut_tab(String s,boolean isPalindrome[][],int dp[]) {
+         for(int idx=s.length()-1;idx>=0;idx--) {
+              if(isPalindrome[idx][s.length()-1]) {
+                  dp[idx]=0;
+                  continue;
+              }
+
+              int res=(int)(1e8);
+              for(int cut=idx;cut<s.length();cut++) {
+                   if(isPalindrome[idx][cut]) {
+                        res=Math.min(res,dp[cut+1]+1);
+                   }
+              }
+              dp[idx]=res;
+         }
+         return dp[0];
+    }
     public int minCut(String s) {
         boolean isPalindrome[][]=makeIsPalindrome(s);
         int dp[]=new int[s.length()];
-        return minCut_rec(s,0,isPalindrome,dp);
+        // return minCut_rec(s,0,isPalindrome,dp);
+        return minCut_tab(s,isPalindrome,dp);
     }
 }
