@@ -24,8 +24,8 @@ class Solution {
             graph[i]=new ArrayList<>();
         }
         for(int edge[]:prerequisites) {
-            int u=edge[0];
-            int v=edge[1];
+            int u=edge[1];
+            int v=edge[0];
             graph[u].add(v);
         }
         int vis[]=new int[N];
