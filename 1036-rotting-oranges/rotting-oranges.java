@@ -17,9 +17,9 @@ class Solution {
         if(freshOranges==0) {
             return 0;
         }
-        if(queue.size()==0) {
-            return -1;
-        }
+        // if(queue.size()==0) {
+        //     return -1;
+        // }
         System.out.println(queue);
         int dirs[][]={{-1,0},{0,-1},{1,0},{0,1}};
         int level=0;
