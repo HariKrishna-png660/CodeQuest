@@ -20,13 +20,17 @@ class Solution {
     public List<Integer> eventualSafeNodes(int[][] graph) {
         int N=graph.length;
         List<Integer> safeNodes=new ArrayList<>();
+        int vis[]=new int[N];
         for(int i=0;i<N;i++) {
-            int vis[]=new int[N];
-            if(topo_dfs(graph,vis,i)) {
+             if(vis[i]==0) {
+                 topo_dfs(graph,vis,i);
+             }
+        }
+        for(int i=0;i<N;i++) {
+            if(vis[i]==2) {
                 safeNodes.add(i);
             }
         }
-        Collections.sort(safeNodes);
         return safeNodes;
     }
 }
