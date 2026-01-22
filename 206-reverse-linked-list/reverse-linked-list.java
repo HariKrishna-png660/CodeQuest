@@ -10,15 +10,13 @@
  */
 class Solution {
     public ListNode reverseList(ListNode head) {
-        ListNode prev=null;
-        ListNode curr=head;
-        while(curr!=null) {
-            // store the next node because we are going to lose it access
-            ListNode nextNode=curr.next;
-            curr.next=prev;
-            prev=curr;
-            curr=nextNode;
+        if(head==null || head.next==null) {
+            return head;
         }
-        return prev;
+        // reverse the all the nodes that are after me then i will also add in reverse
+        ListNode newNode=reverseList(head.next);
+        head.next.next=head;
+        head.next=null;
+        return newNode;
     }
 }
