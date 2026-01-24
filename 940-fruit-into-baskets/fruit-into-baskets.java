@@ -3,9 +3,9 @@ class Solution {
         int n=fruits.length;
         int si=0;
         int ei=0;
+        int maxFruits=0;
+        int freq[]=new int[(int)(1e5)+1];
         int count=0;
-        int maxLen=0;
-        int freq[]=new int[100001];
         while(ei<n) {
             if(freq[fruits[ei]]==0) {
                 count++;
@@ -19,8 +19,8 @@ class Solution {
                 freq[fruits[si]]--;
                 si++;
             }
-            maxLen=Math.max(maxLen,ei-si);
+            maxFruits=Math.max(maxFruits,ei-si);
         }
-        return maxLen;
+        return maxFruits;
     }
 }
