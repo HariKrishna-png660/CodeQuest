@@ -2,17 +2,17 @@ class Solution {
     public int[] intersection(int[] nums1, int[] nums2) {
         int n=nums1.length;
         int m=nums2.length;
-        HashMap<Integer,Integer> map=new HashMap<>();
+        Set<Integer> set=new HashSet<>();
         for(int i=0;i<n;i++) {
             int value=nums1[i];
-            map.put(value,map.getOrDefault(value,0)+1);
+            set.add(value);
         }
         ArrayList<Integer> common=new ArrayList<>();
         for(int i=0;i<m;i++) {
             int value=nums2[i];
-            if(map.containsKey(value)) {
+            if(set.contains(value)) {
                 common.add(value);
-                map.remove(value);
+                set.remove(value);
             }
         }
         int size=common.size();
