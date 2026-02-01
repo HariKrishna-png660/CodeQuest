@@ -1,29 +1,44 @@
 class Solution {
-    public List<List<Integer>> makePairs(int arr[],long target,int si,int ei) {
-        int i=si;
-        int j=ei;
+    public List<List<Integer>> twoSum(int nums[],long target,int si,int ei) {
+        int low=si;
+        int high=ei;
         List<List<Integer>> ans=new ArrayList<>();
-
-        while(i<j) {
-            long sum=arr[i]+arr[j];
-
+        int n=nums.length;
+        while(low<high) {
+            int sum=nums[low]+nums[high];
             if(sum==target) {
-                ArrayList<Integer> smallAns=new ArrayList<>();
-                smallAns.add(arr[i]);
-                smallAns.add(arr[j]);
-                ans.add(smallAns);
-                i++;
-                j--;
-
-                while(i<j && arr[i-1]==arr[i]) i++;
-                while(i<j && arr[j+1]==arr[j]) j--;
+                ans.add(new ArrayList<>(Arrays.asList(nums[low],nums[high])));
+                low++;
+                high--;
+                while(low>0 && low<high && nums[low-1]==nums[low]) {
+                     low++;
+                }
+                while(high<n-1 && high>low && nums[high+1]==nums[high]) {
+                     high--;
+                }
             }
             else if(sum<target) {
-                i++;
+                low++;
             }
             else {
-                j--;
+                high--;
             }
+        }
+        return ans;
+    }
+    public List<List<Integer>> kSum(int nums[],long target,int k,int si,int ei) {
+        if(k==2) {
+            return twoSum(nums,target,si,ei);
+        }
+        List<List<Integer>> ans=new ArrayList<>();
+        for(int i=si;i<=ei;i++) {
+            if(i>si && nums[i-1]==nums[i]) {
+                continue;
+            }
+            int fixedElement=nums[i];
+            long updatedTarget=target-(long)fixedElement;
+            List<List<Integer>> smallAns=kSum(nums,updatedTarget,k-1,i+1,ei);
+            addFixedElement(ans,smallAns,fixedElement);
         }
         return ans;
     }
@@ -32,24 +47,6 @@ class Solution {
             sAns.add(fixedElement);
             ans.add(sAns);
         }
-    }
-    public List<List<Integer>> kSum(int nums[],long target,int k,int si,int ei) {
-        if(k==2) {
-            return makePairs(nums,target,si,ei);
-        }
-        List<List<Integer>> ans=new ArrayList<>();
-
-        for(int i=si;i<=ei;i++) {
-            if(i>si && nums[i-1]==nums[i]) {
-                continue;
-            }
-            int fixedElement=nums[i];
-            long updatedTarget=target-fixedElement;
-
-            List<List<Integer>> smallAns=kSum(nums,updatedTarget,k-1,i+1,ei);
-            addFixedElement(ans,smallAns,fixedElement);
-        }
-        return ans;
     }
     public List<List<Integer>> fourSum(int[] nums, int target) {
          Arrays.sort(nums);
