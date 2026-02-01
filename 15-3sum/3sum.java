@@ -37,7 +37,7 @@ class Solution {
             }
             int fixedElement=nums[i];
             int updatedTarget=target-fixedElement;
-            List<List<Integer>> smallAns=twoSum(nums,updatedTarget,i+1,ei);
+            List<List<Integer>> smallAns=kSum(nums,updatedTarget,k-1,i+1,ei);
             addFixedElement(ans,smallAns,fixedElement);
         }
         return ans;
