@@ -1,20 +1,40 @@
 class Solution {
-    public int[] twoSum(int[] numbers, int target) {
-        int n=numbers.length;
-        int si=0;
-        int ei=n-1;
-        while(si<ei) {
-            int sum=numbers[si]+numbers[ei];
-            if(sum<target) {
-                si++;
+    public int binarySearch(int arr[],int tar) {
+        int n=arr.length;
+        int low=0;
+        int high=n-1;
+        int ans=-1;
+        while(low<=high) {
+            int mid=(low+high)/2;
+            if(arr[mid]==tar) {
+                ans=mid;
+                low=mid+1;
             }
-            else if(sum>target) {
-                ei--;
+            else if(arr[mid]<tar) {
+                low=mid+1;
             }
             else {
-                return new int[]{si+1,ei+1};
+                high=mid-1;
             }
         }
-        return new int[]{};
+        return ans;
+    }
+    public int[] twoSum(int[] numbers, int target) {
+        // fix the curr Element and search for the req number by binary search 
+        int n=numbers.length;
+        // iterate on each of the element in the array
+        for(int i=0;i<n;i++) {
+            int curr=numbers[i];
+            int req=target-curr;
+            int index=binarySearch(numbers,req);
+            if(index != -1 && index != i) {
+                int ans[]=new int[2];
+                ans[0]=i+1;
+                ans[1]=index+1;
+                Arrays.sort(ans);
+                return ans;
+            }
+        }
+        return new int[]{-1,-1};
     }
 }
