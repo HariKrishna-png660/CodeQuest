@@ -1,55 +1,40 @@
 class Solution {
-    public List<List<Integer>> makePairs(int nums[],int target,int si,int ei) {
-        int i=si;
-        int j=ei;
-        List<List<Integer>> ans=new ArrayList<>();
-        while(i<j) {
-            int sum=nums[i]+nums[j];
+    public void findTwoSum(int arr[],int start,int end,List<List<Integer>> ans,int num,int target) {
+        int n=arr.length;
+        while(start<end) {
+            int sum=arr[start]+arr[end];
             if(sum==target) {
-               List<Integer> smallAns=new ArrayList<>();
-               smallAns.add(nums[i]);
-               smallAns.add(nums[j]);
-               ans.add(smallAns);
-               i++;
-               j--;
-
-               while(i<j && nums[i-1]==nums[i]) i++;
-               while(i<j && nums[j+1]==nums[j]) j--; 
-            }
+                ans.add(new ArrayList<>(Arrays.asList(num,arr[start],arr[end])));
+                start++;
+                end--;
+                  while(start>0 && start<end && arr[start-1]==arr[start]) {
+                    start++;
+                  }
+                  while(end<n-1 && end>start && arr[end+1]==arr[end]) {
+                     end--;
+                   }
+           }
             else if(sum<target) {
-                i++;
+                 start++;
             }
             else {
-                j--;
+                 end--;
             }
         }
-        return ans;
-    }
-    public void addFixedElement(List<List<Integer>> ans,List<List<Integer>> smallAns,int fixedElement) {
-        for(List<Integer> sAns:smallAns) {
-            sAns.add(fixedElement);
-            ans.add(sAns);
-        }
-    }
-    public List<List<Integer>> kSum(int nums[],int target,int k,int si,int ei) {
-        if(k==2) {
-            return makePairs(nums,target,si,ei);
-        }
-        List<List<Integer>> ans=new ArrayList<>();
-
-        for(int i=si;i<=ei;i++) {
-            if(i>si && nums[i-1]==nums[i]) {
-                continue;
-            }
-            int fixedElement=nums[i];
-            int updatedTarget=target-fixedElement;
-            List<List<Integer>> smallAns=kSum(nums,updatedTarget,k-1,i+1,ei);
-            addFixedElement(ans,smallAns,fixedElement);
-        }
-        return ans;
     }
     public List<List<Integer>> threeSum(int[] nums) {
+        // FIX EACH OF THE ELEMENT AND THEN SEARCH FOR THE TWO SUM THAT GET THE REQ TARGET FROM THE REMAINING ELEMENTS
         Arrays.sort(nums);
-        return kSum(nums,0,3,0,nums.length-1);
+        int n=nums.length;
+        List<List<Integer>> ans=new ArrayList<>();
+        // fix the curr element 
+        for(int i=0;i<n;i++) {
+            if(i!=0 && nums[i-1]==nums[i]) {
+                continue;
+            }
+            int elementAtI=nums[i];
+            findTwoSum(nums,i+1,n-1,ans,elementAtI,-elementAtI);
+        }
+        return ans;
     }
 }
