@@ -1,8 +1,8 @@
 class Solution {
-    public int binarySearch(int arr[],int tar) {
+    public int binarySearch(int arr[],int tar,int start,int end) {
         int n=arr.length;
-        int low=0;
-        int high=n-1;
+        int low=start;
+        int high=end;
         int ans=-1;
         while(low<=high) {
             int mid=(low+high)/2;
@@ -26,7 +26,7 @@ class Solution {
         for(int i=0;i<n;i++) {
             int curr=numbers[i];
             int req=target-curr;
-            int index=binarySearch(numbers,req);
+            int index=binarySearch(numbers,req,i,n-1);
             if(index != -1 && index != i) {
                 int ans[]=new int[2];
                 ans[0]=i+1;
