@@ -1,62 +1,23 @@
 class Solution {
-    // public int binarySearch(int arr[],int target) {
-    //     int n=arr.length;
-    //     int si=0;
-    //     int ei=n-1;
-    //     while(si<ei) {
-    //         int mid=(si+ei)/2;
-    //         if(arr[mid]<target) {
-    //             si=mid+1;
-    //         }
-    //         else {
-    //             ei=mid;
-    //         }
-    //     }
-    //     return ei;
-    // }
-    // public List<Integer> findClosestElements(int[] arr, int k, int x) {
-    //     int n=arr.length;
-    //     List<Integer> list=new ArrayList<>();
-    //     for(int val:arr) {
-    //         list.add(val);
-    //     }
-    //     if(x<arr[0]) {           // if the target element is smaller than all the elements in the array 
-    //         return list.subList(0,k);
-    //     }
-    //     if(x>arr[n-1]) {         // if the target element is greater than all the elements in the array
-    //         return list.subList(n-k,n);
-    //     }
-
-    //     int idx=binarySearch(arr,x);  // find the insertion position of the target element
-
-    //     int si=Math.max(0,idx-k);  // if there are no enough elements forward 
-    //     int ei=Math.min(n-1,idx+k); // if there are no extra elements backward 
-    //     while((ei-si+1)>k) {  // take the window with k+1 elements forward and k+1 elements backward 
-    //         if((x-arr[si])<=(arr[ei]-x)) {   // minimizing the window by moving  ei towards left
-    //             ei--;
-    //         }
-    //         else {    // minimizing the window by moving si towards right 
-    //             si++;
-    //         }
-    //     }
-    //     return list.subList(si,ei+1);
-    // }
-    public int binarySearch(int arr[],int tar) {
+    public int findInsertPosition(int arr[],int tar) {
         int n=arr.length;
-        int si=0;
-        int ei=n-1;
-        int ans=-1;
-        while(si<=ei) {
-            int mid=(si+ei)/2;
-            if(arr[mid]>=tar) {
-                ans=mid;
-                ei=mid-1;
+        int low=0;
+        int high=n-1;
+        int pos=n;
+        while(low<=high) {
+            int mid=(low+high)/2;
+            if(arr[mid]==tar) {
+                return mid;
+            }
+            else if(arr[mid]<tar) {
+                low=mid+1;
             }
             else {
-                si=mid+1;
+                pos=mid;
+                high=mid-1;
             }
         }
-        return ans;
+        return pos;
     }
     public List<Integer> findClosestElements(int[] arr, int k, int x) {
          int n=arr.length;
@@ -64,20 +25,22 @@ class Solution {
          for(int i=0;i<n;i++) {
             list.add(arr[i]);
          }
-         if(x<list.get(0)) {
+         // if the target is less than all the elements in the array
+         if(x<arr[0]) {
             return list.subList(0,k);
          }
-         else if(x>list.get(n-1)) {
+         // if the target is greater than all the elements in the array
+         if(x>arr[n-1]) {
             return list.subList(n-k,n);
-         }
+         } 
          else {
-            int pos=binarySearch(arr,x);
-            int si=Math.max(0,pos-k); 
-            int ei=Math.min(pos+k,n-1);
+            int pos=findInsertPosition(arr,x);
+            int si=Math.max(0,pos-k);
+            int ei=Math.min(n-1,pos+k);
             while((ei-si+1)>k) {
-                int valAtSi=list.get(si);
-                int valAtEi=list.get(ei);
-                if(x-valAtSi<=valAtEi-x) {
+                int elementAtSi=list.get(si);
+                int elementAtEi=list.get(ei);
+                if(x-elementAtSi <= elementAtEi-x) {
                     ei--;
                 }
                 else {
