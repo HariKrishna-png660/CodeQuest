@@ -20,7 +20,7 @@ class Solution {
                 boolean canPush=true;
                 while(st.size()>0 && st.peek()>0) {
                     if(st.peek() < -(currentValue)) {
-                        // canPush=true;
+                        canPush=true;
                         st.pop();
                     }
                     else if(st.peek() == -(currentValue)) {
