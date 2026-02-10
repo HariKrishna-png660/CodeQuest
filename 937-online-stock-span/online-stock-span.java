@@ -10,18 +10,18 @@ class StockSpanner {
     Stack<Pair> st;
     int ind;
     public StockSpanner() {
-        st=new Stack<>(); 
-        st.add(new Pair(-1,-1));
+        st=new Stack<>();
+        st.push(new Pair(-1,-1));
         ind=0;
     }
     
     public int next(int price) {
-         while(st.peek().value!=-1 && st.peek().value <= price) {
+        while(st.peek().value!=-1 && st.peek().value<=price) {
             st.pop();
-         }
-         int span=ind-st.peek().index;
-         st.add(new Pair(ind++,price));
-         return span;
+        }
+        int span=ind-st.peek().index;
+        st.push(new Pair(ind++,price));
+        return span;
     }
 }
 
