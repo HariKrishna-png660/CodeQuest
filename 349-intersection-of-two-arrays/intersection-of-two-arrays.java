@@ -2,20 +2,20 @@ class Solution {
     public int[] intersection(int[] nums1, int[] nums2) {
         int n=nums1.length;
         int m=nums2.length;
-        HashSet<Integer> set=new HashSet<>();
-        HashSet<Integer> ans=new HashSet<>();
+        HashMap<Integer,Integer> map1=new HashMap<>();
         for(int i=0;i<n;i++) {
-           set.add(nums1[i]);
+            map1.put(nums1[i],map1.getOrDefault(nums1[i],0)+1);
         }
+        HashMap<Integer,Integer> ans=new HashMap<>();
         for(int i=0;i<m;i++) {
-            if(set.contains(nums2[i])) {
-                ans.add(nums2[i]);
-            }
+            if(map1.containsKey(nums2[i]) && !ans.containsKey(nums2[i])) {
+                ans.put(nums2[i],1);
+            } 
         }
         int res[]=new int[ans.size()];
         int i=0;
-        for(int val:ans) {
-            res[i++]=val;
+        for(int key:ans.keySet()) {
+            res[i++]=key;
         }
         return res;
     }
