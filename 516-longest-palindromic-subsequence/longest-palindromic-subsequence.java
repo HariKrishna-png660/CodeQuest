@@ -1,23 +1,25 @@
 class Solution {
-    //  (i,j) -> (i+1,j) and (i,j-1) 
+    public int longestPalindromeSubseq(String s,int si,int ei,int dp[][]) {
+        if(si>ei) {
+            return 0;
+        }
+        if(si==ei) {
+            return dp[si][ei]=1;
+        }
+        if(dp[si][ei]!=-1) {
+            return dp[si][ei];
+        }
+        if(s.charAt(si)==s.charAt(ei)) {
+            return dp[si][ei]=longestPalindromeSubseq(s,si+1,ei-1,dp)+2;
+        }
+        return dp[si][ei]=Math.max(longestPalindromeSubseq(s,si,ei-1,dp),longestPalindromeSubseq(s,si+1,ei,dp));
+    }
     public int longestPalindromeSubseq(String s) {
         int n=s.length();
         int dp[][]=new int[n][n];
-         int maxLen=0;
-        for(int diag=0;diag<n;diag++) {
-            for(int i=0,j=diag;j<n;j++,i++) {
-                if(diag==0) {
-                    dp[i][j]=1;
-                }
-                else{
-                    dp[i][j]=Math.max(dp[i+1][j],dp[i][j-1]);
-                    if(s.charAt(i)==s.charAt(j)) {
-                        dp[i][j]=2+dp[i+1][j-1];
-                    }
-                }
-                maxLen=Math.max(maxLen,dp[i][j]);
-            }
+        for(int i=0;i<n;i++) {
+            Arrays.fill(dp[i],-1);
         }
-      return maxLen;
+        return longestPalindromeSubseq(s,0,n-1,dp);
     }
 }
