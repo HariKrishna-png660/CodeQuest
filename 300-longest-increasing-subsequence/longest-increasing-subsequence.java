@@ -5,11 +5,7 @@ class Solution {
         int high=n-1;
         while(low<=high) {
             int mid=(low+high)/2;
-            if(lis.get(mid)==tar) {
-                low=mid;
-                break;
-            }
-            else if(lis.get(mid)<tar) {
+             if(lis.get(mid)<tar) {
                 low=mid+1;
             }
             else {
