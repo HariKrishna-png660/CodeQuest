@@ -1,34 +1,23 @@
 class Solution {
-    public int findInsertionIndex(ArrayList<Integer> lis,int ele) {
-        int n=lis.size();
-        int si=0;
-        int ei=n-1;
-        int ans=n;
-        while(si<=ei) {
-            int mid=(si+ei)/2;
-            if(lis.get(mid)>=ele) {
-                ans=mid;
-                ei=mid-1;
+    public int lengthOfLIS(int nums[],int idx,int dp[]) {
+        if(dp[idx]!=0) {
+            return dp[idx];
+        }
+        int ans=0;
+        for(int j=idx-1;j>=0;j--) {
+            if(nums[j]<nums[idx]) {
+                ans=Math.max(ans,lengthOfLIS(nums,j,dp));
             }
-            else {
-                si=mid+1;
-            }
-        } 
-        return ans;
+        }
+        return dp[idx]=ans+1;
     }
     public int lengthOfLIS(int[] nums) {
         int n=nums.length;
-        ArrayList<Integer> lis=new ArrayList<>();
-        for(int i=0;i<n;i++) {
-            int ele=nums[i];
-            int idx=findInsertionIndex(lis,ele);
-            if(idx==lis.size()) {
-                lis.add(ele);
-            }
-            else {
-                lis.set(idx,ele);
-            }
+        int dp[]=new int[n];
+        int maxLen=1;
+        for(int i=n-1;i>=0;i--) {
+            maxLen=Math.max(maxLen,lengthOfLIS(nums,i,dp));
         }
-        return lis.size();
+        return maxLen;
     }
 }
