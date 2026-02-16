@@ -1,20 +1,4 @@
 class Solution {
-    public boolean isMatch_rec(String s,String p,int n,int m,Boolean dp[][]) {
-        if(n==0 || m==0) {
-            if(n==0 && m==0)  return dp[n][m]=true;
-            else if(m==1 && p.charAt(m-1)=='*') return dp[n][m]=true;
-            return dp[n][m]=false;
-        }
-        if(dp[n][m]!=null)  return dp[n][m];
-        boolean res=false;
-        if((s.charAt(n-1) == p.charAt(m-1)) || p.charAt(m-1) == '?') {
-            res=isMatch_rec(s,p,n-1,m-1,dp);
-        }
-        else if(p.charAt(m-1)=='*') {
-            res= isMatch_rec(s,p,n-1,m,dp) || isMatch_rec(s,p,n,m-1,dp);
-        }
-        return dp[n][m]=res;
-    }
     public String removeConsecutiveStars(String p) {
         int n=p.length();
         StringBuilder sb=new StringBuilder();
@@ -34,8 +18,28 @@ class Solution {
         p=removeConsecutiveStars(p);
         int n=s.length();
         int m=p.length();
-        // System.out.println(p);
-        Boolean dp[][]=new Boolean[n+1][m+1];
-        return isMatch_rec(s,p,n,m,dp);
+        boolean dp[][]=new boolean[n+1][m+1];
+        for(int j=0;j<=m;j++) {
+            for(int i=0;i<=n;i++) {
+                if(i==0 || j==0) {
+                    if(i==0 && j==0) {
+                        dp[i][j]=true;
+                        continue;
+                    }
+                    else if(j==1 && p.charAt(j-1)=='*') {
+                        dp[i][j]=true;
+                        continue;
+                    }
+                    dp[i][j]=false;
+                }
+                else if(s.charAt(i-1) == p.charAt(j-1) || p.charAt(j-1)=='?') {
+                     dp[i][j]=dp[i-1][j-1];
+                }
+                else if(p.charAt(j-1)=='*') {
+                    dp[i][j]=dp[i-1][j] || dp[i][j-1];
+                }
+            }
+        }
+        return dp[n][m];
     }
 }
