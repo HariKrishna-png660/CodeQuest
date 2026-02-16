@@ -1,22 +1,34 @@
 class Solution {
+    public void findInsertionPosition(ArrayList<Integer> lis,int tar) {
+        int n=lis.size();
+        int low=0;
+        int high=n-1;
+        while(low<=high) {
+            int mid=(low+high)/2;
+            if(lis.get(mid)==tar) {
+                low=mid;
+                break;
+            }
+            else if(lis.get(mid)<tar) {
+                low=mid+1;
+            }
+            else {
+                high=mid-1;
+            }
+        }
+        if(low==n) {
+            lis.add(n,tar);
+        }
+        else {
+            lis.set(low,tar);
+        }
+    }
     public int lengthOfLIS(int[] nums) {
         int n=nums.length;
-        int dp[]=new int[n];
-        int maxLen=1;
+        ArrayList<Integer> list=new ArrayList<>();
         for(int i=0;i<n;i++) {
-            if(i==0) {
-                dp[i]=1;
-                continue;
-            }
-            int ans=0;
-            for(int j=i-1;j>=0;j--) {
-                if(nums[j]<nums[i]) {
-                    ans=Math.max(ans,dp[j]);
-                }
-            }
-            dp[i]=ans+1;
-            maxLen=Math.max(maxLen,dp[i]);
+            findInsertionPosition(list,nums[i]);
         }
-        return maxLen;
+        return list.size();
     }
 }
