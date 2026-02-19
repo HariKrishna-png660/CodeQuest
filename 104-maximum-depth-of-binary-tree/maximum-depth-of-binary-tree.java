@@ -18,8 +18,8 @@ class Solution {
          if(root==null) {
             return 0;
          }
-         int leftSubTreeDepth=maxDepth(root.left);
-         int rightSubTreeDepth=maxDepth(root.right);
-         return Math.max(leftSubTreeDepth,rightSubTreeDepth)+1;
+         int leftSubTreedepth=maxDepth(root.left);
+         int rightSubTreedepth=maxDepth(root.right);
+         return Math.max(leftSubTreedepth,rightSubTreedepth)+1;
     }
 }
