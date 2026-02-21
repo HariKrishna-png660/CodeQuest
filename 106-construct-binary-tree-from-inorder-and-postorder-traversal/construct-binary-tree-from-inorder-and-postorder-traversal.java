@@ -20,7 +20,7 @@ class Solution {
         }
         TreeNode root=new TreeNode(postorder[pei]);
         int rootIdx=isi;
-        while(rootIdx<=iei && inorder[rootIdx]!=root.val) {
+        while(inorder[rootIdx]!=root.val) {
             rootIdx++;
         }
         int leftElements=rootIdx-isi;
