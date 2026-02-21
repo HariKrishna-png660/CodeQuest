@@ -39,6 +39,9 @@ class Solution {
             if(ntr1.get(i).equals(ntr2.get(j))) {
                lca=ntr1.get(i);
             }
+            else {
+                break;
+            }
             i--;
             j--;
         }
