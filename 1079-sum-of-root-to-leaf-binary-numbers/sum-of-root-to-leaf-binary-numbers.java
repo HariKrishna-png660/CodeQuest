@@ -14,48 +14,23 @@
  * }
  */
 class Solution {
-    public int binaryToDecimal(String s) {
-        int n=s.length();
-        int num=0;
-        for(int i=0;i<n;i++) {
-            char ch=s.charAt(i);
-            if(ch=='1') {
-               num += (int) Math.pow(2,n-1-i);
-            }
-        }
-        return num;
-    }
-    public ArrayList<String> getAllRootToLeafPaths(TreeNode root) {
+    public void getAllRootToLeafPaths(TreeNode root,ArrayList<String> paths,String psf) {
         if(root==null) {
-            return new ArrayList<>();
+            return;
         }
         if(root.left==null && root.right==null) {
-            ArrayList<String> baseAns=new ArrayList<>();
-            baseAns.add(root.val+"");
-            return baseAns;
+            paths.add(psf+root.val+"");
+            return;
         }
-        ArrayList<String> myAns=new ArrayList<>();
-        ArrayList<String> left=getAllRootToLeafPaths(root.left);
-        for(String s:left) {
-            StringBuilder sb=new StringBuilder(s);
-            sb.insert(0,root.val+"");
-            myAns.add(sb.toString());
-        }
-        ArrayList<String> right=getAllRootToLeafPaths(root.right);
-        for(String s:right) {
-             StringBuilder sb=new StringBuilder(s);
-            sb.insert(0,root.val+"");
-            myAns.add(sb.toString());
-        }
-        return myAns;
+        getAllRootToLeafPaths(root.left,paths,psf+root.val+"");
+        getAllRootToLeafPaths(root.right,paths,psf+root.val+"");
     }
     public int sumRootToLeaf(TreeNode root) {
-        ArrayList<String> paths=getAllRootToLeafPaths(root);
-        // System.out.println(paths);
+        ArrayList<String> paths=new ArrayList<>();
+        getAllRootToLeafPaths(root,paths,"");
         int sum=0;
-        for(int i=0;i<paths.size();i++) {
-            int decimal=binaryToDecimal(paths.get(i));
-            sum += decimal;
+        for(String s:paths) {
+            sum += Integer.parseInt(s,2);
         }
         return sum;
     }
