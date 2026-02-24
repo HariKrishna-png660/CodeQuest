@@ -14,24 +14,17 @@
  * }
  */
 class Solution {
-    public void getAllRootToLeafPaths(TreeNode root,ArrayList<String> paths,String psf) {
+    public int dfs(TreeNode root,int current) {
         if(root==null) {
-            return;
+            return 0;
         }
+        current=current*2+root.val;
         if(root.left==null && root.right==null) {
-            paths.add(psf+root.val+"");
-            return;
+            return current;
         }
-        getAllRootToLeafPaths(root.left,paths,psf+root.val+"");
-        getAllRootToLeafPaths(root.right,paths,psf+root.val+"");
+        return dfs(root.right,current)+dfs(root.left,current);
     }
     public int sumRootToLeaf(TreeNode root) {
-        ArrayList<String> paths=new ArrayList<>();
-        getAllRootToLeafPaths(root,paths,"");
-        int sum=0;
-        for(String s:paths) {
-            sum += Integer.parseInt(s,2);
-        }
-        return sum;
+        return dfs(root,0);
     }
 }
