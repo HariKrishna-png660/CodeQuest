@@ -37,17 +37,14 @@ class Solution {
         ListNode secondHead=reverse(nextNode);
         ListNode temp1=firstHead;
         ListNode temp2=secondHead;
-        ListNode dummyNode=new ListNode(-1);
-        ListNode curr=dummyNode;
-        while(temp2!=null) {
-            curr.next=temp1;
-            temp1=temp1.next;
-            curr=curr.next;
-            curr.next=temp2;
-            temp2=temp2.next;
-            curr=curr.next;
+        while(temp2!=null){
+            ListNode nextNode1=temp1.next;
+            temp1.next=temp2;
+            temp1=nextNode1;
+            ListNode nextNode2=temp2.next;
+            temp2.next=temp1;
+            temp2=nextNode2;
         }
-        curr.next=temp1;
-        // dummyNode.next=null;
+        
     }
 }
