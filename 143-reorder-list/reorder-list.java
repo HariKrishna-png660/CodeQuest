@@ -9,7 +9,7 @@
  * }
  */
 class Solution {
-    public ListNode middleOfLinkedList(ListNode head) {
+    public ListNode getMid(ListNode head) {
         ListNode slow=head;
         ListNode fast=head;
         while(fast.next!=null && fast.next.next!=null) {
@@ -30,23 +30,24 @@ class Solution {
         return prev;
     }
     public void reorderList(ListNode head) {
-        ListNode middle=middleOfLinkedList(head);
-        ListNode nextNode=middle.next;
+        ListNode mid=getMid(head);
+        ListNode nextNode=mid.next;
+        mid.next=null;
+        ListNode firstHead=head;
         ListNode secondHead=reverse(nextNode);
-        middle.next=null;
+        ListNode temp1=firstHead;
+        ListNode temp2=secondHead;
         ListNode dummyNode=new ListNode(-1);
         ListNode curr=dummyNode;
-        ListNode temp1=head;
-        ListNode temp2=secondHead;
         while(temp2!=null) {
-             curr.next=temp1;
-             temp1=temp1.next;
-             curr=curr.next;
-             curr.next=temp2;
-             temp2=temp2.next;
-             curr=curr.next;
+            curr.next=temp1;
+            temp1=temp1.next;
+            curr=curr.next;
+            curr.next=temp2;
+            temp2=temp2.next;
+            curr=curr.next;
         }
         curr.next=temp1;
-        // return dummyNode.next;
+        // dummyNode.next=null;
     }
 }
