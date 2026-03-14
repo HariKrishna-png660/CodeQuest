@@ -9,6 +9,32 @@
  * }
  */
 class Solution {
+    public void undo(ListNode head) {
+        ListNode evenPosDummy=new ListNode(-1);
+        ListNode oddPosDummy=new ListNode(-1);
+        ListNode evenCurr=evenPosDummy;
+        ListNode oddCurr=oddPosDummy;
+        ListNode curr=head;
+        int pos=0;
+        while(curr!=null) {
+           ListNode nextNode=curr.next;
+           curr.next=null;
+           if(pos%2==0) {
+              evenCurr.next=curr;
+              evenCurr=evenCurr.next;
+           }
+           else {
+              oddCurr.next=curr;
+              oddCurr=oddCurr.next;
+           }
+           curr=nextNode;
+           pos++;
+        }
+       ListNode oddPosHead=oddPosDummy.next;
+       oddPosDummy.next=null;
+       ListNode midNext=reverse(oddPosHead);
+       evenCurr.next=midNext;
+    }
     public ListNode getMid(ListNode head) {
         ListNode slow=head;
         ListNode fast=head;
@@ -29,7 +55,7 @@ class Solution {
         }
         return prev;
     }
-    public void reorderList(ListNode head) {
+    public void reorderList1(ListNode head) {
         ListNode mid=getMid(head);
         ListNode nextNode=mid.next;
         mid.next=null;
@@ -45,6 +71,11 @@ class Solution {
             temp2.next=temp1;
             temp2=nextNode2;
         }
-        
+
+    }
+     public void reorderList(ListNode head) {
+        reorderList1(head);
+        undo(head);
+        reorderList1(head);
     }
 }
