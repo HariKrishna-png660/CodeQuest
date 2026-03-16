@@ -32,6 +32,7 @@ class Solution {
     public void reorderList(ListNode head) {
         ListNode mid=getMid(head);
         ListNode nextNode=mid.next;
+        mid.next=null;
         ListNode secondHead=reverse(nextNode);
         ListNode temp1=head;
         ListNode temp2=secondHead;
@@ -50,6 +51,6 @@ class Solution {
             temp2=nextNode2;
             curr=curr.next;
         }
-        curr.next=null;
+        // curr.next=null;
     }
 }
