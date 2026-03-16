@@ -9,57 +9,56 @@
  * }
  */
 class Solution {
-    ListNode ohead;
-    ListNode otail;
-    ListNode thead;
-    ListNode ttail;
+    static ListNode ohead;
+    static ListNode otail;
+    static ListNode thead;
+    static ListNode ttail;
+    public void addFirst(ListNode newNode) {
+        // ListNode newNode = new ListNode(val);
+        if(thead==null) {
+            thead=newNode;
+            ttail=newNode;
+        }
+        else {
+            newNode.next=thead;
+            thead=newNode;
+        }
+    }
     public int getSize(ListNode head) {
-        ListNode temp=head;
         int size=0;
-        while(temp!=null) {
+        ListNode temp=head;
+        while(temp != null) {
             temp=temp.next;
             size++;
         }
         return size;
     }
-    public void addFirst(ListNode node) {
-        if(thead==null) {
-            thead=node;
-            ttail=node;
-        }
-        else {
-            node.next=thead;
-            thead=node;
-        }
-    }
     public ListNode reverseKGroup(ListNode head, int k) {
-        ohead=null;
-        otail=null;
-        thead=null;
-        ttail=null;
-        int size=getSize(head);
-        ListNode curr=head;
-        while(size>=k) {
-            int K=k;
-            while(K-->0) {
-               ListNode nextNode=curr.next;
-               curr.next=null;
-               addFirst(curr);
-               size--;
-               curr=nextNode;
+         ohead=null;
+         otail=null;
+         thead=null;
+         ttail=null;
+         int size=getSize(head);
+         ListNode curr=head;
+         while(size >= k) {
+            for(int i=0;i<k;i++) {
+                ListNode nextNode=curr.next;
+                curr.next=null;
+                addFirst(curr);
+                curr=nextNode;
+                size--;
             }
-            // this is for creating the first original list
             if(ohead==null) {
-                 ohead=thead;
-                 otail=ttail;
+               ohead=thead;
+               otail=ttail;
             }
             else {
-                otail.next=thead;
-                otail=ttail;
+               otail.next=thead;
+               otail=ttail;
             }
             thead=null;
             ttail=null;
-        }
+         }
         otail.next=curr;
         return ohead;
     }
