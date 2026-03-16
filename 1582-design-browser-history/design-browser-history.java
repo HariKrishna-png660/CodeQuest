@@ -1,22 +1,22 @@
 class BrowserHistory {
-    ListNode curr;
-    class ListNode {
+    class Node {
         String data;
-        ListNode next;
-        ListNode prev;
-        public ListNode(String data){
+        Node next;
+        Node prev;
+        public Node(String data) {
             this.data=data;
         }
     }
+    Node curr;
     public BrowserHistory(String homepage) {
-        curr=new ListNode(homepage);
+        curr=new Node(homepage);
     }
     
     public void visit(String url) {
-        ListNode newNode=new ListNode(url);
+        Node newNode=new Node(url);
         curr.next=newNode;
         newNode.prev=curr;
-        curr=newNode;
+        curr=curr.next;
     }
     
     public String back(int steps) {
