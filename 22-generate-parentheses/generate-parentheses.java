@@ -1,19 +1,19 @@
 class Solution {
-    public static void gp(List<String> list,String current,int open,int close,int max) {
-        if(current.length()==2*max) {
-            list.add(current);
+    public void generateParenthesis(String curr,int open,int close,int n,List<String> ans) {
+         if(curr.length()== 2*n) {
+            ans.add(curr);
             return;
-        }
-        if(open<max) {
-            gp(list,current+"(",open+1,close,max);
-        }
-        if(close<open) {
-            gp(list,current+")",open,close+1,max);
-        }
+         }
+         if(open<n) {
+             generateParenthesis(curr+"(",open+1,close,n,ans);
+         }
+         if(close<open) {
+            generateParenthesis(curr+")",open,close+1,n,ans);
+         }
     }
     public List<String> generateParenthesis(int n) {
-        List<String> list=new ArrayList<>();
-        gp(list,"",0,0,n);
-        return list;
+        List<String> ans=new ArrayList<>();
+        generateParenthesis("",0,0,n,ans);
+        return ans;
     }
 }
