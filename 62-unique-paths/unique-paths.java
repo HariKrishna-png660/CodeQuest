@@ -1,22 +1,18 @@
 class Solution {
+    public int uniquePaths(int sr,int sc,int dr,int dc,int dp[][]) {
+        if(sr==dr && sc==dc) {
+            return 1;
+        }
+        if(sr<0 || sc<0 || sr>dr || sc>dc) {
+            return 0;
+        }
+        if(dp[sr][sc] != 0) {
+            return dp[sr][sc];
+        }
+        return  dp[sr][sc]=uniquePaths(sr+1,sc,dr,dc,dp)+uniquePaths(sr,sc+1,dr,dc,dp);
+    }
     public int uniquePaths(int m, int n) {
         int dp[][]=new int[m][n];
-        
-        for(int j=n-1;j>=0;j--) {
-            for(int i=m-1;i>=0;i--) {
-                if(i==m-1 && j==n-1) {
-                    dp[m-1][n-1]=1;
-                    continue;
-                }
-                dp[i][j]=0;
-                if(i+1<m) {
-                    dp[i][j] += dp[i+1][j];
-                }
-                if(j+1<n) {
-                    dp[i][j] += dp[i][j+1];
-                }
-            }
-        }
-        return dp[0][0];
+        return uniquePaths(0,0,m-1,n-1,dp);
     }
 }
