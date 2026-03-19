@@ -15,9 +15,9 @@ class Solution {
         // brute force 
         int n=s.length();
         int maxLen=0;
-        int si=-1;
+        int si=0;
         for(int i=0;i<n;i++) {
-            for(int j=i+1;j<n;j++) {
+            for(int j=i;j<n;j++) {
                 if(isPalindrome(s,i,j)) {
                     if(j-i+1 > maxLen) {
                         maxLen=j-i+1;
@@ -26,6 +26,6 @@ class Solution {
                 }
             }
         }
-        return si==-1 ?s.substring(0,1): s.substring(si,si+maxLen);
+        return  s.substring(si,si+maxLen);
     }
 }
