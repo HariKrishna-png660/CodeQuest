@@ -1,26 +1,29 @@
 class Solution {
-    public int uniquePathsWithObstacles(int[][] obstacleGrid) {
-        int m=obstacleGrid.length;
-        int n=obstacleGrid[0].length;
+    public int uniquePaths(int sr,int sc,int dr,int dc,int mat[][],int dp[][]) {
+         if(sr==dr && sc==dc && mat[sr][sc]==0) {
+            return 1;
+         }
+         if(dp[sr][sc] != 0) {
+            return dp[sr][sc];
+         }
+         int paths=0;
+         if(sc+1 <= dc && mat[sr][sc] == 0) {
+              int rightPaths=uniquePaths(sr,sc+1,dr,dc,mat,dp);
+              paths += rightPaths;
+         }
+         if(sr+1 <= dr && mat[sr][sc] == 0) {
+              int downPaths=uniquePaths(sr+1,sc,dr,dc,mat,dp);
+              paths += downPaths;
+         }
+         return dp[sr][sc]=paths;
+    }
+    public int uniquePathsWithObstacles(int[][] mat) {
+        int m=mat.length;
+        int n=mat[0].length;
         int dp[][]=new int[m][n];
-        for(int j=n-1;j>=0;j--) {
-            for(int i=m-1;i>=0;i--) {
-                 if(obstacleGrid[i][j]==1) {
-                     continue;
-                 }
-                 if(i==m-1 && j==n-1) {
-                    dp[i][j]=1;
-                    continue;
-                 }
-                 dp[i][j]=0;
-                 if(i+1<m) {
-                    dp[i][j] += dp[i+1][j];
-                 }
-                 if(j+1<n) {
-                    dp[i][j] += dp[i][j+1];
-                 }
-            }
-        }
-        return dp[0][0];
+        // for(int i=0;i<m;i++) {
+        //     Arrays.fill(dp[i],-1);
+        // }
+        return uniquePaths(0,0,m-1,n-1,mat,dp);
     }
 }
