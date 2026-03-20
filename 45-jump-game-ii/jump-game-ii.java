@@ -1,22 +1,20 @@
 class Solution {
+    public int jump(int idx,int nums[],int n,int dp[]) {
+         if(idx==n-1) {
+            return 0;
+         }
+         if(dp[idx] != 0) {
+            return dp[idx];
+         }
+         int jumps=Integer.MAX_VALUE;
+         for(int i=idx+1;i<=Math.min(nums[idx]+idx,n-1);i++) {
+             jumps=Math.min(jumps,jump(i,nums,n,dp));
+         }
+         return dp[idx]=jumps==Integer.MAX_VALUE ? jumps:jumps+1;
+    }
     public int jump(int[] nums) {
         int n=nums.length;
         int dp[]=new int[n];
-        dp[n-1]=0;
-        for(int i=n-2;i>=0;i--) {
-            int min=Integer.MAX_VALUE;
-            for(int j=0;j<nums[i];j++) {
-                if(i+j+1<n) {
-                   min=Math.min(min,dp[i+j+1]);
-                }
-            }
-            if(min!=Integer.MAX_VALUE) {
-                dp[i]=min+1;
-            }
-            else {
-                dp[i]=min;
-            }
-        }
-        return dp[0];
+        return jump(0,nums,n,dp);
     }
 }
