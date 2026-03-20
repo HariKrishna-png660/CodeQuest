@@ -38,18 +38,16 @@ class Solution {
     public boolean isPossible(int candies[],int maxCandies,long k) {
         int n=candies.length;
         for(int i=0;i<n;i++) {
-            int distribution=candies[i]/maxCandies;
-            k -= distribution;
+            k -= (candies[i]/maxCandies);
         }
-        return k<=0;
+        return k <=0;
     }
     public int maximumCandies(int[] candies, long k) {
-        // binary search on the answer 
-        // maximize the minimum
-        int low=1; // candies={1} and k=1 
-        int high=(int)(1e7); // candies={10^7} and k=1
+        int n=candies.length;
+        int low=1;
+        int high=(int)1e9;
         int ans=0;
-        while(low<=high) {
+        while(low <= high) {
             int mid=(low+high)/2;
             if(isPossible(candies,mid,k)) {
                 ans=mid;
@@ -59,6 +57,6 @@ class Solution {
                 high=mid-1;
             }
         }
-        return ans;
+       return ans;
     }
 }
