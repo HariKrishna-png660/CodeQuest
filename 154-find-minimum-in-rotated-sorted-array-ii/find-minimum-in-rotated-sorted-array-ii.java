@@ -3,12 +3,12 @@ class Solution {
         int n=nums.length;
         int si=0;
         int ei=n-1;
-        while(si<ei) {
+        while(si < ei) {
             int mid=(si+ei)/2;
-            if(nums[mid]>nums[ei]) {
-                 si=mid+1;
+            if(nums[mid] > nums[ei]) { // right part is unsorted 
+                si = mid+1;
             }
-            else if(nums[si]<nums[mid]){
+            else if(nums[si] > nums[mid]) {
                 ei=mid;
             }
             else {
