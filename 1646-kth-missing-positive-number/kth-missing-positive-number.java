@@ -1,27 +1,28 @@
 class Solution {
-    public int findInsertionIndex(int arr[],int tar) {
+    public int findInsertionIndex(int arr[],int k) {
         int n=arr.length;
-        int low=0;
-        int high=n-1;
+        int si=0;
+        int ei=n-1;
         int ans=-1;
-        while(low<=high) {
-            int mid=(low+high)/2;
-            if(arr[mid]<tar) {
-                 low=mid+1;
-                 ans=mid;
+        while(si <= ei) {
+            int mid=(si+ei)/2;
+            if(arr[mid]<k) {
+                ans=mid;
+                si=mid+1;
             }
             else {
-                 high=mid-1;
+                ei=mid-1;
             }
         }
         return ans;
     }
     public int findKthPositive(int[] arr, int k) {
-        int n=arr.length;
-        int diff[]=new int[n];
-        for(int i=1;i<=n;i++) {
+         int n=arr.length;
+         int diff[] =new int[n];
+         for(int i=1;i<=n;i++) {
             diff[i-1]=arr[i-1]-i;
-        }
-        return findInsertionIndex(diff,k)+k+1;
+         }
+         int index=findInsertionIndex(diff,k);
+         return index+k+1;
     }
 }
