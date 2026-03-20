@@ -41,29 +41,27 @@ class Solution {
         int n=nums.length;
         int si=0;
         int ei=n-1;
-        while(si<=ei) {
-             int mid=(si+ei)/2;
-             if(nums[mid]==target) {
+        while(si <= ei) {
+            int mid=(si+ei)/2;
+            if(nums[mid]==target) {
                 return mid;
-             }
-             else if(nums[si]<=nums[mid]) { // left sise half is sorted  and target may or may not exist here
-                 // checking for the target
-                 if(nums[si]<=target && nums[mid]>target) {
+            }
+            else if(nums[si] <= nums[mid]) { // left part is sorted 
+                 if(nums[si] <= target && nums[mid] > target) {
                     ei=mid-1;
                  }
                  else {
                     si=mid+1;
                  }
-             }
-             else {  
-                // check whether 
-                if(nums[mid]<target && nums[ei]>=target) {
+            } 
+            else {
+                if(nums[ei] >= target && nums[mid] < target) {
                     si=mid+1;
                 }
                 else {
                     ei=mid-1;
                 }
-             }
+            }
         }
         return -1;
     }
