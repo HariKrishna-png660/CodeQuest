@@ -32,25 +32,25 @@ class Solution {
     public boolean isPossible(int piles[],int speed,int h) {
         int n=piles.length;
         for(int i=0;i<n;i++) {
-            double timeRequired=((double)piles[i]/(double)speed);
-            h -= Math.ceil(timeRequired);
+            int timeTaken=(int)Math.ceil((double)piles[i]/(double)speed);
+            // System.out.println(timeTaken);
+            h -= timeTaken;
         }
-        return h>=0;
+        return h >= 0;
     }
     public int minEatingSpeed(int[] piles, int h) { 
-         // binary search on the answer 
-         // maximize the minimum
-         int low=1;  // when piles={1} and h=1 then speed should be 1
-         int high=(int)(1e9); // when piles={10^9} and h=1  then speed should be 10^9
-         int ans=0;
-         while(low<=high) {
+         int n=piles.length;
+         int low=1;
+         int high=(int)1e9;
+         int ans=1;
+         while(low <= high) {
             int mid=(low+high)/2;
             if(isPossible(piles,mid,h)) {
-                  ans=mid;
-                  high=mid-1;
+                ans=mid;
+                high=mid-1;
             }
             else {
-                  low=mid+1;
+                low=mid+1;
             }
          }
          return ans;
